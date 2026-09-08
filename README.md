@@ -2,23 +2,30 @@
 
 **Local-First Agentic Infrastructure on AMD**
 
-InnerOS Labs is building an auditable, local-first agentic compute fabric that can orchestrate autonomous AI workloads across AMD edge hardware and AMD cloud infrastructure.
+InnerOS AMD ACT III is an auditable local-first agentic compute fabric designed to route autonomous AI workloads across AMD edge and cloud infrastructure while preserving the evidence needed to understand, verify and replay every execution.
 
-## Hackathon thesis
+## One-line pitch
 
-Most agent systems treat compute as an invisible backend. InnerOS makes compute placement, routing, evidence and replay first-class parts of the product.
+> An auditable local-first agentic compute fabric that routes autonomous AI workloads across AMD edge and cloud GPUs, records why each decision was made, and makes every run replayable.
 
-The ACT III entry will focus on a reproducible demonstration where autonomous agents can:
+## Why this project exists
 
-- run locally on AMD ROCm hardware;
-- route selected workloads to AMD cloud capacity when policy or capability requires it;
-- execute multiple tasks concurrently;
-- expose routing reasons, latency, throughput and cost-related evidence;
-- preserve decision evidence for every run;
-- replay historical runs without silently refreshing the world state;
-- quantify Human Time Returned on real workflows.
+Most agent demos show what a model answered. InnerOS aims to show **where the work ran, why it ran there, what the agent saw, what it did, how long it took, what it cost, and whether the execution can be independently verified later**.
 
-## Proposed architecture
+That turns AI infrastructure from a black box into an inspectable execution fabric.
+
+## Target AMD stack
+
+- AMD ROCm
+- local AMD GPU execution
+- vLLM + Qwen workloads
+- AMD Developer Cloud for elastic execution
+- multi-agent orchestration through MCP/A2A-compatible boundaries
+- machine-readable performance and routing evidence
+
+Exact ACT III cloud hardware and track-specific AMD technologies will be recorded after the official tracks and access details are published.
+
+## Architecture
 
 ```text
 User / Workflow
@@ -38,53 +45,95 @@ InnerOS Control Plane
       +--> Forensic Replay
 ```
 
-## Existing pre-hackathon building blocks
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-This repository intentionally separates the ACT III submission from pre-existing InnerOS components. Existing work may be integrated through documented interfaces rather than copied blindly into the hackathon repository.
+## Current seed implementation
 
-Current pre-hackathon building blocks include:
+The repository already contains a dependency-light Python reference core that demonstrates:
 
-- InnerOS agentic control plane;
-- local execution plane;
-- model/capability routing;
-- Qwen + vLLM serving on AMD ROCm;
-- experimental R9700 / HyperLoom compatibility and concurrency work;
-- Decision Evidence schemas;
-- Human Time Returned instrumentation design;
-- Forensic Replay / Evidence Bundle work;
-- MCP and A2A communication layers.
+- local-first routing;
+- privacy fail-closed behavior;
+- elastic-capacity routing to cloud;
+- availability fallback;
+- structured routing reason codes;
+- canonical evidence serialization;
+- SHA-256 evidence verification;
+- deterministic unit tests;
+- GitHub Actions CI.
 
-See [`docs/PRE_HACKATHON_BASELINE.md`](docs/PRE_HACKATHON_BASELINE.md) for the formal baseline boundary.
+This seed is intentionally provider-neutral before ACT III. The hackathon-period work will connect the core to the final AMD local/cloud runtime and visual demo.
 
-## ACT III target demonstration
+## Run it
 
-A user launches a complex workflow. InnerOS decomposes the work into agent tasks, evaluates privacy/capability/load policy, executes tasks on AMD local or cloud resources, records why each route was chosen, measures the result, and produces a replayable evidence bundle.
-
-The visible demo should make the edge-to-cloud path understandable in seconds, not require judges to reverse-engineer six terminals and a prayer.
-
-## Repository structure
-
-```text
-docs/          Architecture, baseline and technical notes
-submission/    LabLab copy, judging notes, metrics and demo script
-src/           ACT III-specific implementation
-benchmarks/    Reproducible performance and routing measurements
-tests/         Functional and evidence verification
+```bash
+python -m pip install -e .
+python -m unittest discover -s tests -v
+python -m inneros_act3.demo
 ```
 
-## Guiding constraints
+## Pre-hackathon originality boundary
 
-- Local-first by default.
-- AMD-first execution path for the submission.
-- Measured claims must remain distinguishable from estimates.
-- Existing capabilities must be labeled as pre-hackathon baseline.
-- New ACT III work must be attributable to the submission period.
-- No benchmark claim without machine-readable evidence.
-- No cloud dependency when a local path can perform the task adequately.
+This repository is being prepared before ACT III. Existing InnerOS capabilities are documented separately in [`docs/PRE_HACKATHON_BASELINE.md`](docs/PRE_HACKATHON_BASELINE.md).
 
-## Status
+Immediately before kickoff we will freeze the exact baseline SHA/tag. Final submission claims will distinguish:
 
-Pre-hackathon preparation. Tracks and final implementation scope will be adjusted once AMD/LabLab publish the complete ACT III challenge details.
+- **pre-existing** building blocks;
+- **integrated during ACT III** capabilities;
+- **newly built during ACT III** features.
+
+Experimental AMD compatibility will not be described as official upstream support unless that becomes factually true.
+
+## Success criteria
+
+A strong final demo should prove:
+
+1. a real workload runs on AMD infrastructure;
+2. workloads can route between local AMD and AMD cloud based on policy/capability;
+3. routing reasons are captured in structured evidence;
+4. execution metrics are measured and machine-readable;
+5. historical evidence can be verified offline;
+6. a multi-agent workflow works end to end;
+7. the visual UI makes edge-to-cloud movement understandable in seconds;
+8. business value is visible through Human Time Returned, cost and quality metrics.
+
+## Repository map
+
+```text
+src/inneros_act3/           routing + evidence seed
+tests/                      deterministic tests
+docs/ARCHITECTURE.md        working architecture
+docs/PRE_HACKATHON_BASELINE.md
+                            originality boundary
+docs/ROADMAP.md             execution plan
+submission/PROJECT_DESCRIPTION.md
+                            LabLab copy draft
+submission/DEMO_CHECKLIST.md
+                            judge/demo checklist
+submission/VIDEO_SCRIPT.md  3-minute video draft
+.github/workflows/ci.yml     CI
+```
+
+## Current event state
+
+ACT III is scheduled for October 2026. The official LabLab page currently lists the judging dimensions as **Application of Technology, Presentation, Business Value and Originality**. Tracks are still TBA as of this pre-hackathon preparation phase, so the project is intentionally not locked to one track yet.
+
+Official event page: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii
+
+## Truth boundary
+
+Project claims use explicit evidence states:
+
+- **PROVEN** — reproduced with evidence;
+- **PARTIAL** — some acceptance criteria remain;
+- **CONTRACT-ONLY** — interface exists, live integration not proven;
+- **PLANNED** — design only.
+
+No benchmark claim is considered proven without reproducible evidence.
+
+## Team
+
+**InnerOS Labs**  
+Building local-first, auditable agentic infrastructure.
 
 ## License
 
