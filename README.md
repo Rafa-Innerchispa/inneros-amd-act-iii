@@ -1,5 +1,16 @@
 # InnerOS Labs — AMD Developer Hackathon ACT III
 
+<!-- INNEROS-NARRATIVE:START -->
+> **InnerOS role:** R&D / Infrastructure Validation  
+> **Lifecycle:** Experimental / hackathon track  
+> **Lineage:** AMD ACT III workstream validating sovereign local inference, ROCm routing, execution evidence, and replay.
+>
+> The reusable outcome belongs to the InnerOS sovereign-compute layer: local-first inference with explicit routing, cost, privacy, and evidence boundaries.
+>
+> **InnerOS principle:** hackathons are validation environments. Reusable capabilities are extracted into maintained products and platform layers rather than treated as disconnected one-off projects.
+<!-- INNEROS-NARRATIVE:END -->
+
+
 **Local-First Agentic Infrastructure on AMD**
 
 InnerOS AMD ACT III is an auditable local-first agentic compute fabric designed to route autonomous AI workloads across AMD edge and cloud infrastructure while preserving the evidence needed to understand, verify and replay every execution.
