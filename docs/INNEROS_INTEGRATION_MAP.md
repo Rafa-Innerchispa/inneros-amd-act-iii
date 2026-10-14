@@ -54,6 +54,8 @@ AMD Developer Cloud is the natural extension for event-specific workloads that s
 ### Strategic cloud providers
 InnerOS has provider adapters for external cloud paths, but cloud is not the default. External compute is used when policy/capability justifies it.
 
+For ACT III, the preferred partner-cloud path is a **Gemma model on AMD Developer Cloud / ROCm**, exposed through an OpenAI-compatible or dedicated vLLM endpoint. The same Gemma endpoint should be reused by the Evolus specialist lane where possible.
+
 ## 3. Agent fabric
 
 ### Orchestration
@@ -148,7 +150,24 @@ Recommended ACT III role:
 
 Evolus should remain a specialist business-process lane, not the InnerOS orchestrator.
 
-The open model for Evolus can run on a separate vLLM endpoint on AMD Developer Cloud, avoiding local R9700 VRAM pressure.
+Use **Workflow + Knowledge Library** as the minimum two Evolus building blocks. The preferred model is the same **Gemma on AMD Developer Cloud / ROCm** used for the Google partner proof, minimizing duplicate infrastructure and avoiding local R9700 VRAM pressure.
+
+### Cognee shared memory
+
+Cognee is **not an official ACT III prize partner**, but it is already a real InnerOS product capability validated in `Rafa-Innerchispa/inneros-personal-brain`.
+
+Existing reusable surfaces include:
+- Cognee Cloud direct recall/remember;
+- canonical dataset `inneros-personal-brain`;
+- official Cognee MCP;
+- direct Strands memory tools;
+- Codex, Cursor and Antigravity shared-memory routes;
+- VoiceOps verified-outcome memory bridge.
+
+ACT III should use this existing fabric to prove:
+`Agent A learns -> Agent B remembers`
+
+For Bellini/AG-60, only curated safe facts/decisions/outcomes should enter Cognee. Private operational context, secrets and customer-sensitive payloads remain in InnerOS private memory (Mongo/Qdrant).
 
 ## 7. Trust and audit layer
 
