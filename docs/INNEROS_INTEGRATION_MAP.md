@@ -54,7 +54,11 @@ AMD Developer Cloud is the natural extension for event-specific workloads that s
 ### Strategic cloud providers
 InnerOS has provider adapters for external cloud paths, but cloud is not the default. External compute is used when policy/capability justifies it.
 
-For ACT III, the preferred partner-cloud path is a **Gemma model on AMD Developer Cloud / ROCm**, exposed through an OpenAI-compatible or dedicated vLLM endpoint. The same Gemma endpoint should be reused by the Evolus specialist lane where possible.
+For ACT III, the Google/AMD partner path uses **Gemma-4-31B-IT through AMD Token Factory** as a visible Multimodal Incident Director. It fuses VoiceOps intent, Bellini visual/topology evidence, AG-60/Device Fabric telemetry and safe shared memory into a schema-checked incident plan that InnerOS turns into governed agent/tool work.
+
+A separate dedicated vLLM endpoint on AMD Developer Cloud may still be required for Evolus eligibility. Where practical, use Gemma there too so the same Google DeepMind open-model family spans both partner demonstrations.
+
+Gemini 4 Argon is a separate governed InnerOS specialist for deep engineering and long-horizon tasks. It is not the ACT III Gemma prize path. Argon must remain behind InnerOS cost controls and local-first routing.
 
 ## 3. Agent fabric
 
@@ -196,13 +200,14 @@ One demo can expose most of InnerOS without turning into a feature checklist:
 3. InnerOS creates/coordinates tasks.
 4. Bellini/Network Engineer agent retrieves persistent site context.
 5. Guardian/Device Fabric provide evidence.
-6. AMD local inference reasons over the incident.
-7. If needed, a specialist external agent handles a bounded unsupported task.
-8. Optional Google/Evolus paths receive sanitized event/business context.
-9. InnerOS requests approval before a consequential action.
-10. Action is executed or safely simulated.
-11. Verification confirms outcome.
-12. Evidence/replay shows exactly what happened.
-13. Human Time Returned quantifies operational value.
+6. Local AMD inference and domain agents prepare the evidence bundle.
+7. Gemma-4-31B-IT on AMD Token Factory acts as Multimodal Incident Director and returns a structured plan with hypotheses, evidence references, required tools and delegated tasks.
+8. InnerOS dispatches those bounded tasks to AG-60 / Guardian / other specialists; optional Argon is reserved for unusually hard engineering work, not routine incident handling.
+9. Evolus can turn the verified technical result into the business workflow/work order.
+10. InnerOS requests approval before a consequential action.
+11. Action is executed or safely simulated.
+12. Verification confirms outcome.
+13. Evidence/replay shows exactly what happened.
+14. Human Time Returned quantifies operational value.
 
 This is a single story that demonstrates the whole operating fabric instead of showing disconnected product modules.
