@@ -1,74 +1,142 @@
-# Video Script — ACT III
+# Video Script — ACT III Final Story
 
-## 0:00–0:25 — The unexpected beginning
+Target length: **4:15–4:35**
+
+Goal: tell the origin story, prove that InnerOS is broader than agent coordination, and spend most of the video showing one real Bellini flow.
+
+---
+
+## 0:00–0:25 — It started with one AMD GPU
 
 I did not start by trying to build an operating system for AI agents.
 
-I started with an AMD GPU.
+I started with one AMD GPU.
 
-After getting access to a Radeon AI PRO R9700 and ROCm, I suddenly had enough local compute to run serious AI workloads on my own infrastructure. Then AMD Skills appeared with a very attractive idea: give coding agents validated AMD workflows directly inside tools like Cursor and Codex.
+After getting access to a Radeon AI PRO R9700 and ROCm, serious local AI suddenly became practical. Then AMD Skills showed another possibility: coding agents could consume validated, hardware-aware workflows directly inside tools like Cursor and Codex.
 
-My first thought was simple: connect the skills, connect the agents, and let them work together.
+My first thought was simple:
+
+Connect the skills, connect the agents, connect the GPU — and let them work together.
 
 It sounded almost easy.
 
-## 0:25–0:55 — Reality
+---
 
-It was not.
+## 0:25–0:55 — The part that was not easy
 
-The models could reason and the GPU could run them, but the agents were not a team.
+The models could reason.
+The GPU could run them.
+The skills could teach repeatable workflows.
 
-Tasks got stuck. Claims expired. Processes died. AMD and Intel nodes behaved differently. An agent could finish something while the coordination layer still thought it was working. Owner approvals duplicated.
+But capable agents did not automatically become a reliable team.
 
-Every bug revealed another missing layer.
+Tasks got stuck. Claims expired. Headless workers died. AMD and Intel execution behaved differently. Owner approvals duplicated. An agent could finish work while coordination still believed it was running.
 
-## 0:55–1:20 — InnerOS
+Every failure exposed another missing layer.
 
 That missing layer became InnerOS.
 
-InnerOS coordinates local and external agents, chooses where work should run, isolates execution, handles ownership and retries, requires approval for risky actions, and records evidence for every run.
+---
 
-The model today is simple:
+## 0:55–1:30 — What InnerOS became
+
+InnerOS is a local-first operating fabric between human intent, interfaces, agents, compute, physical infrastructure and evidence.
+
+Today the model is simple:
 
 ChatGPT orchestrates.
 Local AMD and Intel workers execute first.
 Cursor, Codex and Antigravity become specialist lanes.
-I get interrupted only when a decision actually deserves a human.
+The owner is interrupted only when a decision really deserves a human.
 
-## 1:20–2:05 — Real demonstration
+Underneath that are the less glamorous systems that make autonomy real: task ownership, Temporal and Mongo coordination, isolated worktrees, retries, recovery, runtime registration, approval gates and fail-closed evidence.
 
-Here is the ACT III use case.
+But coordination is only one layer of InnerOS.
 
-A smart-building incident reports intermittent camera and intercom video.
+---
 
-InnerOS turns that report into a workflow.
+## 1:30–2:05 — Voice, buildings and the physical world
 
-One agent correlates telemetry.
-Another retrieves topology and previous incidents.
-A planning agent proposes the lowest-risk remediation.
-The router keeps private, latency-sensitive reasoning on local AMD ROCm compute.
-If the plan needs to change infrastructure, InnerOS stops for explicit human approval.
+VoiceOps lets a person speak an operational intent instead of opening five tools.
 
-Then it verifies the result.
+InnerOS provides the context, routing, policy, approval, execution and evidence behind that voice interaction.
 
-## 2:05–2:35 — Evidence
+Physical Guardian extends the same fabric to existing cameras, DVRs, NVRs and access systems.
 
-The important part is not only that the agents produced an answer.
+And Bellini I-II became our first real building operations site: networking, Wi-Fi, CCTV, recorders, intercoms, access control and voice infrastructure, all inside one environment that already existed before InnerOS arrived.
 
-InnerOS records where the work ran, why that route was selected, which agent and skill acted, the runtime identity, timestamps and output hashes.
+This is where the system stopped being an architecture diagram.
 
-That evidence can be verified and replayed later.
+---
 
-## 2:35–3:00 — Why AMD changed the project
+## 2:05–3:10 — Live ACT III story: Bellini
 
-The R9700 did more than make inference faster.
+Here is the workflow we demonstrate.
 
-It changed what I believed could remain local.
+The operator asks:
 
-AMD Skills showed me how agents could gain repeatable hardware-aware capabilities.
+“Ralphi, what is happening with the cameras in Bellini?”
 
-And discovering why those pieces were not magically enough is what created InnerOS.
+VoiceOps creates the intent and correlation context.
 
-AMD provided the compute.
+InnerOS opens the incident and delegates the work.
 
-InnerOS became the operating layer that lets a team of agents use it responsibly.
+The Network Engineer agent loads persistent Bellini knowledge.
+
+Guardian and Device Fabric provide asset, reachability and service evidence.
+
+Instead of assuming that one unreachable management IP means an entire switch is down, InnerOS separates the management plane, data plane, downstream health and shared failure domain.
+
+Local Qwen reasoning runs on AMD ROCm.
+
+The system correlates affected services, retrieves topology and previous findings, and produces the safest remediation plan it can justify from evidence.
+
+If that plan would change real infrastructure, InnerOS stops and requests explicit owner approval.
+
+Then it executes — or safely simulates the action for the public demo — and verifies the result.
+
+Bellini already gives us measurable value: a preventive technical dossier that was estimated at 240 to 300 minutes of manual work can be produced through the AI Ops workflow in roughly 30 minutes.
+
+That is an estimated pilot saving of about 87.5 to 90 percent.
+
+---
+
+## 3:10–3:40 — Local-first, not local-only
+
+InnerOS is local-first, not isolated.
+
+Google Cloud is already part of the fabric through governed Gemini/Vertex integration, Firestore, Pub/Sub and evidence paths.
+
+For ACT III we are also preparing Evolus as an optional business-process specialist, using its own open model through vLLM on AMD Developer Cloud — without consuming the local R9700.
+
+These systems can extend InnerOS, but they do not become the authority.
+
+InnerOS keeps the approval, execution and evidence boundary.
+
+---
+
+## 3:40–4:10 — Evidence and trust
+
+The important part is not only that an agent produced an answer.
+
+InnerOS records which agent acted, what skill or tool was used, where the workload ran, why that route was selected, the runtime identity, timestamps, artifacts, output hashes, approval and verification.
+
+That execution can later be inspected and replayed.
+
+We also track Human Time Returned, because the purpose of autonomy is not simply to make more AI calls. It is to return useful human time while preserving the decisions that should remain human.
+
+---
+
+## 4:10–4:30 — Closing
+
+One AMD GPU gave us enough local intelligence to try building a team of autonomous agents.
+
+Discovering why that was not magically enough is what created InnerOS.
+
+AMD did not simply make InnerOS faster.
+
+It changed what we believed could remain local, autonomous and under our control.
+
+This is InnerOS:
+
+from one GPU to an operating fabric for agents, voice, buildings and verifiable autonomous work.
