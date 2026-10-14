@@ -71,15 +71,46 @@ Minimal credible flow:
 
 This demonstrates Google without sacrificing the local-first thesis.
 
+## Google DeepMind / Gemma update — 2026-10-14
+
+The ACT III Discord announcement adds the missing Google-specific requirement:
+
+- Google DeepMind is an ACT III technology partner.
+- Teams using **Gemma** can compete for the dedicated Google prize.
+- Gemma should run on **AMD GPUs in the cloud**, using AMD Developer Cloud / ROCm.
+
+The event now lists a **$5,000 Google prize**.
+
+### Recommended implementation
+
+Do not load another large model onto the local R9700.
+
+Use one Gemma deployment on AMD Developer Cloud as an optional InnerOS specialist lane:
+
+`InnerOS -> governed provider adapter -> Gemma on AMD Developer Cloud / ROCm -> result -> InnerOS evidence`
+
+Prefer to use the **same Gemma/vLLM endpoint for Evolus** so one cloud deployment supports:
+- Google DeepMind / Gemma eligibility;
+- Evolus main-agent model requirement;
+- InnerOS cloud specialist proof.
+
+### Token Factory facts
+
+Official ACT III FAQ / Discord:
+- event access is through `notebooks.amd.com/tokenfactory`;
+- no billing or credit-card information is required there;
+- the $100 AMD credit is **not required** to participate;
+- API key redemption, model catalog and usage are visible after sign-in.
+
+A dedicated vLLM endpoint may still be required for Evolus eligibility even when a shared Token Factory model API exists.
+
 ## Google partner truth boundary
 
-The public ACT III page currently advertises a Google partner prize but does not publish a detailed Google-specific eligibility checklist comparable to the Evolus track.
+Do not claim eligibility merely because GCP/Vertex exists in InnerOS. Claim the Google prize path only after:
+1. Gemma is actually invoked;
+2. the runtime is demonstrably AMD cloud / ROCm;
+3. the run is captured in ACT III evidence.
 
-Therefore:
-- do not claim Google partner eligibility solely because GCP exists in the architecture;
-- capture one live Google-backed path;
-- tag Google technologies truthfully in the submission;
-- preserve evidence showing the actual Google component used.
 
 ---
 
