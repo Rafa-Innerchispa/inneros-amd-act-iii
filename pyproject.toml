@@ -11,6 +11,9 @@ requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [{name = "InnerOS Labs"}]
 
+[project.scripts]
+act3-smoke = "inneros_act3.smoke:main"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
