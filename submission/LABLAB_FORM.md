@@ -11,22 +11,42 @@ Reason: LabLab's live dashboard currently describes the online build window as O
 **InnerOS AMD Sovereign Agent Fabric**
 
 ### Short description
-InnerOS is a local-first agentic compute fabric on AMD ROCm that routes autonomous workloads across local and cloud AMD infrastructure, coordinates specialized agents and skills, and produces replayable evidence for every execution.
+InnerOS began with one AMD GPU and a simple idea: give coding agents AMD Skills and local ROCm compute, then let them work as a team. The failures of that experiment became a local-first agent operating layer that coordinates AMD/Intel workers, specialist agents, approvals, recovery and replayable evidence.
 
 ### Long description
-Autonomous AI agents are becoming capable of real work, but most agent platforms still hide the operational details that matter in production: where each task runs, why a route was selected, which tool or skill acted, what changed, how long it took, and whether the result can be independently verified later.
+InnerOS did not begin as a plan to build an operating system for AI agents.
 
-InnerOS AMD Sovereign Agent Fabric turns those hidden decisions into part of the product.
+The catalyst was an AMD Radeon AI PRO R9700.
 
-A user request enters the InnerOS control plane and is decomposed into bounded tasks. Capability and policy routing decide which specialized agent and skill should execute each task and whether the workload should remain on local AMD ROCm infrastructure or use an approved AMD cloud path. Local execution is preferred for privacy, latency and sovereignty. Every route emits structured reason codes and runtime identity.
+With local ROCm compute available, serious AI workloads no longer had to depend entirely on remote providers. At the same time, ROCm.AI and AMD Skills showed a compelling new model: coding agents such as Cursor and Codex could consume validated AMD workflows directly inside the tools developers already use.
 
-For ACT III, the flagship demonstration is a smart-building infrastructure incident. InnerOS receives a degradation report affecting cameras or intercom video, correlates telemetry, retrieves topology and previous evidence, builds a bounded remediation plan, requires human approval before any mutating action, verifies the outcome and seals the complete run as replayable evidence.
+The first idea sounded simple: connect the skills, connect the agents, connect the local GPU, and let them work together.
 
-The AMD stack is not decorative. Local inference runs on AMD hardware with ROCm, using local Qwen/vLLM workloads. The system is designed around real execution constraints: hardware availability, routing policy, failover, observability, agent coordination and measurable business value.
+That was the beginning of InnerOS.
 
-The final evidence bundle records runtime identity, route reasons, timestamps, output hashes and Human Time Returned. Historical runs can be verified and replayed without silently refreshing external state.
+The models could reason. The GPU could run them. Skills could teach hardware-aware workflows. But the agents were still not a reliable team. Tasks could be created and never claimed. Leases expired. Headless processes died. Local AMD and Intel paths behaved differently. Repositories existed but were not always safely executable. Owner authorization could duplicate. An agent could finish work while the coordination layer still believed it was running.
 
-InnerOS therefore demonstrates a different idea of agentic infrastructure: not simply an AI that can answer, but an execution fabric that can show where the work ran, why it ran there, what it did and whether the result can still be trusted later.
+Those failures became the product roadmap.
+
+InnerOS evolved into the missing execution layer between human intent, skills, agents and compute.
+
+Today the system is moving toward a simple operating model:
+
+**ChatGPT orchestrates. Local Dev Swarm workers execute first across AMD and Intel. Cursor, Codex and Antigravity become specialist external lanes. The owner is interrupted only when a decision deserves human attention.**
+
+Underneath that model are the less glamorous systems that make autonomy real: durable coordination, Temporal/Mongo reconciliation, isolated worktrees, Project Runtime Registry, bounded execution, owner-scoped approvals, fail-closed evidence, retry/recovery logic, local release governance and replayable execution receipts.
+
+ACT III turns that journey into one concrete Intelligent Industry demonstration.
+
+A smart-building incident reports intermittent degradation in cameras or intercom video. InnerOS decomposes the problem, assigns specialized agents and skills, correlates telemetry, retrieves topology and prior evidence, plans a bounded remediation and keeps privacy- or latency-sensitive reasoning on local AMD ROCm compute. Any mutating action requires explicit human approval. The system then verifies the outcome and seals the run with runtime identity, route reasons, timestamps, hashes and Human Time Returned.
+
+The central claim is not that one model became smarter.
+
+It is that **AMD compute made local intelligence practical, AMD Skills showed how agents could gain repeatable hardware-aware capabilities, and discovering why those pieces were not magically enough forced us to build the coordination fabric that became InnerOS.**
+
+The R9700 did more than accelerate inference.
+
+It changed the architecture of the project.
 
 ### Technology tags
 - AMD ROCm
