@@ -1,22 +1,74 @@
-# Video Script Draft
+# Video Script — ACT III
 
-## 0:00–0:20 — Problem
-Autonomous agents are getting better at doing work, but most systems still hide where that work runs, why a route was chosen, and how a decision can be verified later.
+## 0:00–0:25 — The unexpected beginning
 
-## 0:20–0:45 — Thesis
-InnerOS is a local-first agentic compute fabric for AMD infrastructure. It routes workloads between AMD edge and cloud resources based on privacy, capability, latency, cost and availability.
+I did not start by trying to build an operating system for AI agents.
 
-## 0:45–1:30 — Live execution
-Launch a multi-step workflow. Show tasks routed to local AMD ROCm and AMD cloud targets. Highlight concurrent agents, reason codes and measured performance.
+I started with an AMD GPU.
 
-## 1:30–2:00 — Evidence
-Open one execution. Show model/runtime identity, timestamps, routing evidence, output metrics and the SHA-256 manifest.
+After getting access to a Radeon AI PRO R9700 and ROCm, I suddenly had enough local compute to run serious AI workloads on my own infrastructure. Then AMD Skills appeared with a very attractive idea: give coding agents validated AMD workflows directly inside tools like Cursor and Codex.
 
-## 2:00–2:25 — Replay
-Run Audit Replay without refreshing external state. Verify that the historical evidence has not changed.
+My first thought was simple: connect the skills, connect the agents, and let them work together.
 
-## 2:25–2:50 — Business value
-Show Human Time Returned, automation rate, local/cloud breakdown and cost/quality metrics.
+It sounded almost easy.
 
-## 2:50–3:00 — Close
-AMD gives us the compute. InnerOS makes autonomous execution local-first, inspectable and replayable.
+## 0:25–0:55 — Reality
+
+It was not.
+
+The models could reason and the GPU could run them, but the agents were not a team.
+
+Tasks got stuck. Claims expired. Processes died. AMD and Intel nodes behaved differently. An agent could finish something while the coordination layer still thought it was working. Owner approvals duplicated.
+
+Every bug revealed another missing layer.
+
+## 0:55–1:20 — InnerOS
+
+That missing layer became InnerOS.
+
+InnerOS coordinates local and external agents, chooses where work should run, isolates execution, handles ownership and retries, requires approval for risky actions, and records evidence for every run.
+
+The model today is simple:
+
+ChatGPT orchestrates.
+Local AMD and Intel workers execute first.
+Cursor, Codex and Antigravity become specialist lanes.
+I get interrupted only when a decision actually deserves a human.
+
+## 1:20–2:05 — Real demonstration
+
+Here is the ACT III use case.
+
+A smart-building incident reports intermittent camera and intercom video.
+
+InnerOS turns that report into a workflow.
+
+One agent correlates telemetry.
+Another retrieves topology and previous incidents.
+A planning agent proposes the lowest-risk remediation.
+The router keeps private, latency-sensitive reasoning on local AMD ROCm compute.
+If the plan needs to change infrastructure, InnerOS stops for explicit human approval.
+
+Then it verifies the result.
+
+## 2:05–2:35 — Evidence
+
+The important part is not only that the agents produced an answer.
+
+InnerOS records where the work ran, why that route was selected, which agent and skill acted, the runtime identity, timestamps and output hashes.
+
+That evidence can be verified and replayed later.
+
+## 2:35–3:00 — Why AMD changed the project
+
+The R9700 did more than make inference faster.
+
+It changed what I believed could remain local.
+
+AMD Skills showed me how agents could gain repeatable hardware-aware capabilities.
+
+And discovering why those pieces were not magically enough is what created InnerOS.
+
+AMD provided the compute.
+
+InnerOS became the operating layer that lets a team of agents use it responsibly.
