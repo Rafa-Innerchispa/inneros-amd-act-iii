@@ -2,73 +2,57 @@
 
 Status: **READY TO FILL / ASSETS IN PROGRESS**
 
-Internal deadline: **October 17, 2026**  
-Reason: LabLab's live dashboard currently describes the online build window as October 12–17, while the main event page shows October 12–18 including the on-site phase. We use October 17 as the safe submission deadline.
+Internal deadline: **October 17, 2026**
 
-## Basic information
+## Exact LabLab fields
 
-### Project title
-**InnerOS AMD Sovereign Agent Fabric**
+### Submission Title — 43 / 50 characters
+**InnerOS: From One AMD GPU to Autonomous Ops**
 
-### Short description
-InnerOS began with one AMD GPU and a simple idea: give coding agents AMD Skills and local ROCm compute, then let them work as a team. The failures of that experiment became a local-first agent operating layer that coordinates AMD/Intel workers, specialist agents, approvals, recovery and replayable evidence.
+### Short Description — 197 / 255 characters
+InnerOS turns local AMD ROCm compute into a governed operating fabric for agents, voice and smart buildings - coordinating local and specialist AI, human approval, recovery and replayable evidence.
 
-### Long description
-InnerOS did not begin as a plan to build an operating system for AI agents.
+### Long Description — 1675 / 2000 characters, 244 words
+InnerOS did not begin as a plan to build an operating system for AI agents. It began with one AMD Radeon AI PRO R9700 and a simple idea: connect local ROCm compute, AMD Skills and coding agents, then let them work as a team. The hardware and models worked. The team did not magically appear. Tasks stalled, claims expired, workers died, approvals duplicated and local AMD and Intel execution behaved differently. Those failures became the roadmap for InnerOS.
 
-The catalyst was an AMD Radeon AI PRO R9700.
+Today InnerOS connects human intent, VoiceOps, local AMD/Intel compute, specialized agents, physical infrastructure, cloud services, owner approval and verifiable evidence. ChatGPT orchestrates; local Dev Swarm workers execute first; Cursor, Codex and Antigravity act as specialist lanes; consequential actions remain human-governed.
 
-With local ROCm compute available, serious AI workloads no longer had to depend entirely on remote providers. At the same time, ROCm.AI and AMD Skills showed a compelling new model: coding agents such as Cursor and Codex could consume validated AMD workflows directly inside the tools developers already use.
+ACT III demonstrates the fabric through Bellini I-II, a real smart-building environment with networking, CCTV/NVR, intercom, access control and voice systems. A voice request becomes an incident; the persistent Network Engineer loads site context; Guardian and Device Fabric provide evidence; Qwen reasons locally on AMD ROCm; InnerOS proposes the safest justified action, requests approval if infrastructure would change, verifies the result and seals the execution for replay. A pilot technical-dossier workflow reduced an estimated 240-300 minutes of manual work to about 30 minutes.
 
-The first idea sounded simple: connect the skills, connect the agents, connect the local GPU, and let them work together.
+InnerOS is local-first, not local-only: governed Google Cloud paths and an optional Evolus business-workflow lane can extend the system without taking control away from InnerOS. AMD did not simply make InnerOS faster. It changed what we believed could remain local, autonomous and auditable.
 
-That was the beginning of InnerOS.
+### Participation Mode
+**Online**
 
-The models could reason. The GPU could run them. Skills could teach hardware-aware workflows. But the agents were still not a reliable team. Tasks could be created and never claimed. Leases expired. Headless processes died. Local AMD and Intel paths behaved differently. Repositories existed but were not always safely executable. Owner authorization could duplicate. An agent could finish work while the coordination layer still believed it was running.
+### Primary Category
+**Intelligent Industry**
 
-Those failures became the product roadmap.
-
-InnerOS evolved into the missing execution layer between human intent, skills, agents and compute.
-
-Today the system is moving toward a simple operating model:
-
-**ChatGPT orchestrates. Local Dev Swarm workers execute first across AMD and Intel. Cursor, Codex and Antigravity become specialist external lanes. The owner is interrupted only when a decision deserves human attention.**
-
-Underneath that model are the less glamorous systems that make autonomy real: durable coordination, Temporal/Mongo reconciliation, isolated worktrees, Project Runtime Registry, bounded execution, owner-scoped approvals, fail-closed evidence, retry/recovery logic, local release governance and replayable execution receipts.
-
-ACT III turns that journey into one concrete Intelligent Industry demonstration.
-
-A smart-building incident reports intermittent degradation in cameras or intercom video. InnerOS decomposes the problem, assigns specialized agents and skills, correlates telemetry, retrieves topology and prior evidence, plans a bounded remediation and keeps privacy- or latency-sensitive reasoning on local AMD ROCm compute. Any mutating action requires explicit human approval. The system then verifies the outcome and seals the run with runtime identity, route reasons, timestamps, hashes and Human Time Returned.
-
-The central claim is not that one model became smarter.
-
-It is that **AMD compute made local intelligence practical, AMD Skills showed how agents could gain repeatable hardware-aware capabilities, and discovering why those pieces were not magically enough forced us to build the coordination fabric that became InnerOS.**
-
-The R9700 did more than accelerate inference.
-
-It changed the architecture of the project.
-
-### Technology tags
-- AMD ROCm
-- AMD GPUs
-- vLLM
-- Qwen
-- Agentic AI
-- MCP
-- A2A
-- Skills
-- Multi-agent systems
-- Local-first AI
-- Edge AI
-- Smart Buildings
-- Observability
-- Forensic Replay
-
-### Suggested categories
+### Secondary categories if multiple selection is allowed
 - Agent Builder
-- Intelligent Industry
 - Developer Tools
 - Infrastructure / Operations
+
+### Technologies Used
+- AMD ROCm
+- AMD Radeon AI PRO R9700
+- AMD Skills / ROCm.AI
+- Qwen
+- vLLM
+- Python
+- Docker
+- MCP
+- A2A
+- Temporal
+- MongoDB
+- VoiceOps / SIP
+- Grandstream PBX
+- Device Fabric
+- Network Guardian
+- Physical Guardian
+- Google Vertex AI / Gemini integration
+- Google Firestore / Pub/Sub
+- Evolus (optional ACT III partner integration)
+- GitHub / GitHub Actions
 
 ## Repository and hosting
 
@@ -80,10 +64,11 @@ Status: **PASS — repository is public**
 ### Demo platform
 **PENDING FINAL LIVE DEMO**
 
-Preferred:
-- InnerOS / ACT III judge-facing demo UI
+Preferred composition:
+- ACT III judge-facing InnerOS UI
 - AMD local runtime on Radeon AI PRO R9700
-- approved AMD cloud path only where actually demonstrated
+- Bellini sanitized/captured operational scenario
+- optional Google/Evolus specialist paths only when actually demonstrated
 
 ### Application URL
 **PENDING**
@@ -92,33 +77,35 @@ Do not submit a placeholder URL. Add only after public HTTPS verification.
 
 ## Cover image
 
-Status: **PENDING**
+Status: **READY / VERIFY FINAL CROP**
 
-Creative brief:
-A clean dark technical composition showing InnerOS at the center routing agent workloads between a local AMD ROCm edge node and AMD cloud compute. Include a subtle smart-building/network incident context, evidence trail and replay concept. Avoid generic robot imagery and avoid unsupported AMD branding claims.
+Creative direction:
+InnerOS at the center of a real operating fabric: AMD local compute, agents, VoiceOps, smart-building infrastructure, evidence/replay and optional cloud extensions. Avoid generic humanoid robots.
 
 ## Video presentation
 
-Status: **SCRIPT READY / RECORDING PENDING**
+Status: **SCRIPT UPDATED / RECORDING PENDING**
 
-Target length: approximately 3 minutes.
+Target length: **4:15–4:35**
 
-Source script:
+Source:
 `submission/VIDEO_SCRIPT.md`
 
-Required live proof:
-1. real task enters InnerOS;
-2. agents/skills are visible;
-3. local AMD ROCm route is visible;
-4. reason codes/runtime identity are shown;
-5. smart-building workflow produces a bounded recommendation/action;
-6. evidence bundle is opened;
-7. replay verifies the historical run;
-8. Human Time Returned closes the business story.
+Required proof:
+1. real/safely captured Bellini incident enters InnerOS;
+2. VoiceOps or another real interface creates the intent/correlation context;
+3. agents and skills are visible;
+4. local AMD ROCm route is visible;
+5. Network Engineer / Bellini context is used;
+6. recommendation or bounded action is produced;
+7. owner approval boundary is visible for consequential action;
+8. verification/evidence/replay is shown;
+9. Human Time Returned or Bellini estimated pilot metric closes the business story;
+10. optional Google/Evolus paths are shown only if live evidence exists.
 
 ## Slide presentation
 
-Status: **OUTLINE READY / DECK PENDING**
+Status: **16-SLIDE OUTLINE READY / DECK REBUILD IN PROGRESS**
 
 Source:
 `submission/SLIDE_DECK_OUTLINE.md`
@@ -126,53 +113,54 @@ Source:
 ## Judging alignment
 
 ### Application of Technology
-- AMD ROCm is part of the execution fabric, not a detached benchmark.
-- local model execution is used for private/latency-sensitive workloads.
-- routing and runtime identity are visible in evidence.
+- AMD ROCm is the local intelligence layer, not a detached benchmark.
+- local model execution is preferred for private/latency-sensitive work.
+- AMD Skills are part of the project’s origin and developer workflow story.
+- routing/runtime identity is preserved as evidence.
 
-### Presentation
-- one flagship smart-building scenario;
-- one visual task timeline;
-- one local/cloud routing view;
-- one evidence/replay view;
-- one business-value view.
+### Intelligent Industry
+- Bellini is a real building-operations environment.
+- the demo processes realistic operational evidence and produces explanation, recommendation/action and measurable value.
+- the public demo remains sanitized and bounded.
 
 ### Business Value
-- reduced operator investigation time;
+- faster technical documentation and diagnosis;
 - local-first privacy and sovereignty;
 - controlled remediation;
-- lower manual coordination overhead;
-- measurable Human Time Returned.
+- fewer repetitive coordination steps;
+- Human Time Returned;
+- Bellini pilot dossier: estimated 240–300 min manual vs ~30 min AI Ops workflow (87.5%–90% estimated reduction).
 
 ### Originality
 The differentiator is the combination of:
+- local AMD intelligence;
+- specialized persistent agents;
+- voice and physical-world interfaces;
 - policy-aware workload placement;
-- specialized agents + skills;
-- AMD edge/cloud execution;
-- bounded actions;
+- bounded human approvals;
 - machine-readable evidence;
-- offline forensic replay;
-- business-value measurement.
+- forensic replay;
+- business-value instrumentation.
 
 ## Originality boundary
 
-Pre-hackathon baseline is documented in:
+Pre-hackathon baseline:
 `docs/PRE_HACKATHON_BASELINE.md`
 
-Hackathon-period work is tracked from the frozen baseline and must be described accurately as:
+ACT III work must remain accurately labeled as:
 - pre-existing;
 - integrated during ACT III;
 - newly built during ACT III.
 
-## Final submission blockers
+## Final blockers
 
 - [ ] public demo URL
-- [ ] cover image
-- [ ] 3-minute video
-- [ ] slide deck
-- [ ] live AMD runtime evidence
-- [ ] one end-to-end smart-building run
-- [ ] measured latency/runtime evidence
+- [ ] final cover crop uploaded
+- [ ] video recorded and uploaded
+- [ ] expanded slide deck uploaded
+- [ ] one judge-safe Bellini end-to-end run
+- [ ] measured AMD runtime evidence for the demo
 - [ ] replay verification
-- [ ] Human Time Returned screenshot/metric
-- [ ] final proofread against actual demonstrated capabilities
+- [ ] final Google live proof if included
+- [ ] Evolus live proof if partner track is included
+- [ ] final proofread against demonstrated capabilities
