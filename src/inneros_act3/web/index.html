@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05070b">
+  <title>InnerOS — Live Intelligent Operations</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <canvas id="compute-fabric" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand">Inner<span>OS</span></div>
+        <div class="subtitle">Live Intelligent Operations</div>
+      </div>
+      <nav class="topnav" aria-label="Console sections">
+        <button class="nav-item active" data-scroll="operations">Operations</button>
+        <button class="nav-item" data-scroll="reasoning">Reasoning</button>
+        <button class="nav-item" data-scroll="evidence">Evidence</button>
+      </nav>
+      <div class="truth-cluster">
+        <div id="global-truth" class="truth-pill verified">
+          <span class="dot"></span>
+          <span class="truth-text">VERIFIED EVIDENCE READY</span>
+        </div>
+        <div class="truth-caption">AI reasoned · human governed · evidence captured</div>
+      </div>
+    </header>
+
+    <section class="hero-grid" id="operations">
+      <aside class="incident-rail panel">
+        <div class="eyebrow danger"><span class="pulse-dot"></span> ACTIVE SCENARIO</div>
+        <h1>Network / Camera Outage</h1>
+        <p class="muted">Bellini Tower I · Smart Building Incident</p>
+        <div class="incident-visual" aria-hidden="true">
+          <div class="building-grid">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="incident-beacon">!</div>
+        </div>
+        <dl class="telemetry-list">
+          <div><dt>Packet loss</dt><dd id="packet-loss">82.4%</dd></div>
+          <div><dt>Carrier flaps</dt><dd id="carrier-flaps">14 / min</dd></div>
+          <div><dt>Optical RX</dt><dd id="rx-power">-28.4 dBm</dd></div>
+          <div><dt>Subsystems</dt><dd>3 affected</dd></div>
+        </dl>
+        <div class="severity-row">
+          <span>Severity</span>
+          <strong id="severity-badge" class="badge critical">CRITICAL</strong>
+        </div>
+        <div class="rail-actions">
+          <button id="run-live" class="primary-action"><span class="play-icon">▶</span> Run Live Demo</button>
+          <button id="replay" class="secondary-action">Replay Verified Run</button>
+          <button id="run-mock" class="ghost-action">Mock / Offline</button>
+        </div>
+      </aside>
+
+      <section class="command-center">
+        <div class="section-label">AI-Native Incident Resolution Pipeline</div>
+
+        <div class="pipeline" id="pipeline" aria-label="InnerOS incident resolution pipeline">
+          <article class="stage stage-incident active" data-stage="incident">
+            <div class="stage-icon">⚠</div>
+            <div class="stage-kicker">SOURCE</div>
+            <h2>Bellini Incident</h2>
+            <p>Optical flap + camera telemetry loss</p>
+            <div class="stage-state">DETECTED</div>
+          </article>
+          <div class="connector"><span class="data-pulse"></span></div>
+          <article class="stage stage-gemma" data-stage="gemma">
+            <div class="stage-icon brain">◉</div>
+            <div class="stage-kicker">AMD TOKEN FACTORY</div>
+            <h2>Gemma on AMD</h2>
+            <p>Gemma-4-31B-IT · ROCm</p>
+            <div class="stage-state">READY</div>
+          </article>
+          <div class="connector"><span class="data-pulse"></span></div>
+          <article class="stage stage-evolus" data-stage="evolus">
+            <div class="stage-icon">⌘</div>
+            <div class="stage-kicker">BUSINESS AGENT</div>
+            <h2>Evolus</h2>
+            <p>Workflow + Knowledge Library</p>
+            <div class="stage-state">READY</div>
+          </article>
+          <div class="connector"><span class="data-pulse"></span></div>
+          <article class="stage stage-evidence" data-stage="evidence">
+            <div class="stage-icon shield">✓</div>
+            <div class="stage-kicker">INNEROS</div>
+            <h2>Evidence</h2>
+            <p>Verify · seal · replay</p>
+            <div class="stage-state">READY</div>
+          </article>
+        </div>
+
+        <div class="reasoning panel" id="reasoning">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow blue">AI REASONING · GEMMA ON AMD</div>
+              <h3>Operational diagnosis</h3>
+            </div>
+            <span id="reasoning-truth" class="badge neutral">READY</span>
+          </div>
+          <div id="reasoning-text" class="terminal-copy">
+            Select <strong>Run Live Demo</strong> for a fresh execution, or replay the verified ACT III evidence receipt.
+          </div>
+          <div class="reasoning-meta">
+            <div><span>Model</span><strong id="model-name">Gemma-4-31B-IT</strong></div>
+            <div><span>Runtime</span><strong>AMD ROCm</strong></div>
+            <div><span>Latency</span><strong id="gemma-latency">—</strong></div>
+            <div><span>Tokens</span><strong id="token-count">—</strong></div>
+          </div>
+        </div>
+
+        <div class="lower-grid">
+          <article class="panel plan-panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow">INCIDENT PLAN</div>
+                <h3>AI-directed response</h3>
+              </div>
+              <span id="plan-hash" class="mono-chip">NO RUN</span>
+            </div>
+            <ol id="incident-actions" class="timeline">
+              <li><span>1</span><div><strong>Awaiting incident analysis</strong><p>Gemma will produce a structured IncidentPlan.</p></div></li>
+            </ol>
+          </article>
+
+          <article class="panel workorder-panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow cyan">EVOLUS WORK ORDER</div>
+                <h3 id="workorder-id">Not created</h3>
+              </div>
+              <span class="badge neutral" id="workorder-status">READY</span>
+            </div>
+            <div class="block-badges"><span>Workflow</span><span>Knowledge Library</span></div>
+            <div id="workorder-steps" class="workflow-steps">
+              <div class="workflow-step"><i></i><span>Waiting for governed remediation workflow</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <aside class="evidence-rail" id="evidence">
+        <article class="panel evidence-panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow green">EVIDENCE RECEIPT</div>
+              <h3>Immutable execution proof</h3>
+            </div>
+            <span id="evidence-state" class="badge verified">READY</span>
+          </div>
+
+          <div class="evidence-orbit" aria-hidden="true">
+            <div class="orbit orbit-a"></div>
+            <div class="orbit orbit-b"></div>
+            <div class="evidence-core">SHA</div>
+          </div>
+
+          <div class="hash-box">
+            <span>Bundle SHA-256</span>
+            <code id="bundle-hash">6ee36d69…3b3f845</code>
+            <button id="copy-hash" title="Copy full evidence hash">Copy</button>
+          </div>
+
+          <dl class="evidence-list">
+            <div><dt>Provider</dt><dd id="provider-label">AMD + Evolus</dd></div>
+            <div><dt>Truth</dt><dd id="truth-label">Stored verified run</dd></div>
+            <div><dt>Timestamp</dt><dd id="timestamp-label">2026-10-15 02:40 UTC</dd></div>
+            <div><dt>Application</dt><dd id="application-label">InnerOS</dd></div>
+          </dl>
+        </article>
+
+        <article class="panel time-panel">
+          <div class="eyebrow green">HUMAN TIME RETURNED</div>
+          <div class="time-visual">
+            <div class="time-ring"><div><strong id="time-returned">43</strong><span>minutes</span></div></div>
+            <div class="time-copy">
+              <strong id="automation-rate">95.56%</strong>
+              <span>automation rate</span>
+              <p>From incident detection to governed work order and evidence receipt.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="compute-spine">
+          <div class="compute-title">AMD / ROCm Compute Fabric</div>
+          <div class="compute-model">Gemma-4-31B-IT</div>
+          <div class="compute-bars" aria-hidden="true">
+            <span style="--h:68%"></span><span style="--h:38%"></span><span style="--h:82%"></span>
+            <span style="--h:52%"></span><span style="--h:91%"></span><span style="--h:61%"></span>
+            <span style="--h:74%"></span><span style="--h:44%"></span><span style="--h:87%"></span>
+          </div>
+          <div class="compute-footer">OpenAI-compatible · auditable · local-first governed</div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="judge-strip">
+      <div><span>Google DeepMind Gemma</span><strong>LIVE VERIFIED</strong><small>Gemma-4-31B-IT on AMD Token Factory</small></div>
+      <div><span>Evolus Business Agents</span><strong>LIVE VERIFIED</strong><small>Workflow + Knowledge Library over MCP</small></div>
+      <div><span>InnerOS Evidence</span><strong>REPLAYABLE</strong><small>SHA-256 execution bundle + truth labels</small></div>
+    </section>
+
+    <footer>
+      <span>InnerOS Labs · AMD Developer Hackathon ACT III</span>
+      <span id="connection-state">Console ready</span>
+    </footer>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
