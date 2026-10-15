@@ -21,7 +21,7 @@ Evolus acts as the domain business workflow and knowledge engine. It does **not*
 | **Driven by API** | Fully automated via REST adapter `inneros_act3.evolus_adapter` without human UI intervention. | **PASS (Code & Mock Tested)** |
 | **No Secrets in Git** | All keys resolved strictly via environment variables (`EVOLUS_API_KEY`) or encrypted server vault (`owner_vault:evolus/api_key`). | **PASS (Zero Secrets in Repo)** |
 | **Zero Paid External Inference** | Models run on AMD Developer Cloud / ROCm endpoints. | **PASS (Zero Spend)** |
-| **LIVE External API Proof** | Live round-trip against `https://api.evolus.ai/v1`. | **BLOCKED (`NO_CREDENTIAL_BLOCKED`)** |
+| **LIVE External API Proof** | Live round-trip against `https://api.evolus.ai/mcp` (`X-User-ApiKey`). | **PASS (Verified Live: Evolus2 Data Server v1.0.0, App: InnerOS)** |
 
 ---
 

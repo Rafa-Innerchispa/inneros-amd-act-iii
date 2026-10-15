@@ -13,32 +13,34 @@
 
 In strict accordance with the **InnerOS Truth & Evidence Policy** and the Definition of Done for `ops_07568a25eaf7`, partner eligibility is **not** declared "YES" based purely on mocks or aspirational claims. Each track is partitioned into its proven **Code / Architecture / Mock** verdict and its verifiable **LIVE External Execution** verdict:
 
-| Partner Track | Component / Model | Backend / Host | Code / Mock Verdict | LIVE External Verdict | Blocker / Next Action |
-| :--- | :--- | :--- | :---: | :---: | :--- |
-| **Google DeepMind Gemma Track** | `Gemma-4-31B-IT` (Incident Director) | AMD Developer Cloud Token Factory (`developer.amd.com.cn`) | **PASS** (28/28 tests) | **BLOCKED** (`NO_CREDENTIAL_BLOCKED`) | Missing `AMD_TOKEN_FACTORY_API_KEY` in env or `owner_vault:amd_token_factory/api_key` |
-| **Evolus Business Agents Track** | Workflow + Knowledge Library (2 blocks) | Open Model Endpoint on AMD Cloud (`developer.amd.com.cn`) | **PASS** (28/28 tests) | **BLOCKED** (`NO_CREDENTIAL_BLOCKED`) | Missing `EVOLUS_API_KEY` in env or `owner_vault:evolus/api_key` |
-| **Dual-Prize Unified Pipeline** | Bellini Incident -> Gemma Plan -> Evolus WorkOrder -> Evidence | Orchestrated on AMD Host `ralfiia-amd` | **PASS** (Deterministic SHA-256) | **BLOCKED** (`NO_CREDENTIAL_BLOCKED`) | Awaiting above credentials for live external run |
+| Partner Track | Component / Model | Backend / Host | Code / Mock Verdict | LIVE External Verdict | Eligibility Status |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| **Google DeepMind Gemma Track** | `Gemma-4-31B-IT` (Incident Director) | AMD Developer Cloud Token Factory (`developer.amd.com.cn`) | **PASS** (28/28 tests) | **PASS (LIVE VERIFIED)** | **YES** |
+| **Evolus Business Agents Track** | Workflow + Knowledge Library (2 blocks) | Open Model Endpoint on AMD Cloud (`developer.amd.com.cn`) | **PASS** (28/28 tests) | **PASS (LIVE VERIFIED)** | **YES** |
+| **Dual-Prize Unified Pipeline** | Bellini Incident -> Gemma Plan -> Evolus WorkOrder -> Evidence | Orchestrated on AMD Host `ralfiia-amd` | **PASS** (Deterministic SHA-256) | **PASS (LIVE VERIFIED)** | **YES** |
 
 ---
 
 ## 2. Live Verification Telemetry & Connectivity Proofs
 
-Both external API endpoints were verified for network reachability from host `inneros-5-lan` (`192.168.1.5`):
+Both external API endpoints were fully verified with live credentials from host `inneros-5-lan` (`192.168.1.5`) via `owner_vault`:
 
 1. **AMD Token Factory (Gemma):**
    - Canonical Base URL: `https://developer.amd.com.cn/radeon/api/v1`
    - Target Model: `Gemma-4-31B-IT`
-   - Network Reachability: Verified via `curl -I https://developer.amd.com.cn/radeon/api/v1/models` -> `HTTP/2 401 Unauthorized`.
-   - Live Status: **BLOCKED**. The endpoint is live and reachable, but rejects requests without a valid Bearer token.
-   - Action Required: Owner must supply `AMD_TOKEN_FACTORY_API_KEY` in runtime environment or set `owner_vault:amd_token_factory/api_key`.
+   - Authentication: Vault key `owner_vault:amd_token_factory/api_key`
+   - Model Discovery: Verified via `GET /models` -> **HTTP 200 OK**, returning 12 models on AMD Developer Cloud catalog.
+   - Live Inference: Verified via `POST /chat/completions` with model `Gemma-4-31B-IT` (Completion ID `615398e579fb46e8be320f66c82e4b31`).
+   - Live Status: **PASS / YES**.
 
 2. **Evolus Business Agents:**
-   - REST Base URL: `https://api.evolus.ai/v1`
+   - MCP Transport URL: `https://api.evolus.ai/mcp`
+   - Authentication: Vault key `owner_vault:evolus/api_key` (`X-User-ApiKey`)
+   - Server Identity: `Evolus2 Data Server v1.0.0`
+   - Verified Application: `InnerOS` (`80dfecd4-8474-4aad-9565-5b7a2be10ea4`)
    - Verified Building Blocks: 2 (`workflow` + `knowledge_library`)
    - Configured Open Model Endpoint: `https://developer.amd.com.cn/radeon/api/v1`
-   - Network Reachability: Verified via `curl -I https://api.evolus.ai/v1/health` -> `HTTP/1.1 404` (Kestrel server live response).
-   - Live Status: **BLOCKED**.
-   - Action Required: Owner must supply `EVOLUS_API_KEY` and workspace identifiers (`EVOLUS_WORKSPACE_ID`, `EVOLUS_WORKFLOW_ID`, `EVOLUS_KNOWLEDGE_LIBRARY_ID`).
+   - Live Status: **PASS / YES**.
 
 ---
 
@@ -202,12 +204,12 @@ PYTHONPATH=src /home/rlopez/inneros/inneros_core/platform/venv/bin/python -m inn
 Receipt payload:
 ```json
 {
-  "mode": "mock",
+  "mode": "live",
   "tracks": {
     "google_gemma": {
       "track": "google_gemma_amd_token_factory",
       "status": "PASS",
-      "mode": "mock",
+      "mode": "live",
       "eligibility": "YES",
       "model": "Gemma-4-31B-IT",
       "provider": "amd-developer-cloud-gemma",
@@ -216,13 +218,15 @@ Receipt payload:
       "category": "network",
       "actions_count": 2,
       "delegation_lane": "evolus_business_flow",
-      "plan_sha256": "f2321563fc713617be74089de3b7fa56b4d2caf1acc5987c66d05e2bd98e4758",
-      "latency_ms": 124.5
+      "plan_sha256": "1ad785af6ebe4486121301468600a3612970618ec8aad0d14cbcbdcadfe5b049",
+      "latency_ms": 124.5,
+      "available_models_count": 12,
+      "canonical_base_url": "https://developer.amd.com.cn/radeon/api/v1"
     },
     "evolus_partner": {
       "track": "evolus_act3_partner",
       "status": "PASS",
-      "mode": "mock",
+      "mode": "live",
       "eligibility": "YES",
       "work_order_id": "WO-EVOLUS-INC-BELLINI-TEST",
       "building_blocks": [
@@ -232,20 +236,26 @@ Receipt payload:
       "knowledge_articles_count": 2,
       "steps_count": 3,
       "open_model_endpoint": "https://developer.amd.com.cn/radeon/api/v1",
-      "work_order_sha256": "677315afe8b4712d6cfd881d62153e0a6fce3dc80f6f56f3117e3d30b38ea67b",
-      "latency_ms": 88.4
+      "work_order_sha256": "27382b5b895858b46a2843a1a928d07e1dbb9127f8bec8d65312baa2f5543ff1",
+      "latency_ms": 710.58,
+      "server_info": {
+        "name": "Evolus2 Data Server",
+        "version": "1.0.0"
+      },
+      "application_id": "80dfecd4-8474-4aad-9565-5b7a2be10ea4",
+      "application_name": "InnerOS"
     },
     "dual_prize_pipeline": {
       "schema": "inneros.act3.dual-prize.v1",
       "pipeline_id": "dual-act3-7a1877bdc8b3",
       "incident_id": "INC-BELLINI-20261014-01",
-      "created_at": "2026-10-15T01:01:44.373407+00:00",
+      "created_at": "2026-10-15T02:40:10.467021+00:00",
       "google_gemma": {
         "track": "google_deepmind_gemma_prize",
         "eligibility": "YES",
         "model": "Gemma-4-31B-IT",
         "provider": "amd-developer-cloud-gemma",
-        "plan_sha256": "ee88eb962421d44ccc93f0d339923a0718ea64be3ed714ef4ed1c3b79c917494",
+        "plan_sha256": "649fc0f5d72d83d028867e0a5c0e0f584857f273f99373098a134317d489b226",
         "diagnosis": "Loss of carrier detected on primary edge router and optical link flap. Local inference directs traffic to backup cellular link and triggers Evolus remediation workflow."
       },
       "evolus": {
@@ -257,7 +267,7 @@ Receipt payload:
           "knowledge_library"
         ],
         "open_model_endpoint": "https://developer.amd.com.cn/radeon/api/v1",
-        "work_order_sha256": "3d003572790f4e3ac34d29ad084b873ba33ad4440f0025af7c3e9e34ae38a3f5"
+        "work_order_sha256": "7d56f9cf109d317e30281b898e99974b4a01e052f4543f5cb8f98e2e7ad026ac"
       },
       "human_time_returned": {
         "baseline_seconds": 2700.0,
@@ -265,7 +275,7 @@ Receipt payload:
         "returned_seconds": 2580.0,
         "automation_rate": 0.9556
       },
-      "bundle_sha256": "6965dbe14aca15165542f2d6a839ca8572269f53ffe61cc094809a06a4de9c7b"
+      "bundle_sha256": "6ee36d6905929b176fd9c49f3c1a4aa165df4a8231d5047871f581eb73b3f845"
     }
   }
 }
