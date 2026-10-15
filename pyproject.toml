@@ -13,9 +13,13 @@ authors = [{name = "InnerOS Labs"}]
 
 [project.scripts]
 act3-smoke = "inneros_act3.smoke:main"
+act3-judge = "inneros_act3.judge_console:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+inneros_act3 = ["web/*.html", "web/*.css", "web/*.js"]

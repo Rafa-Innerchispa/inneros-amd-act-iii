@@ -149,3 +149,17 @@ Building local-first, auditable agentic infrastructure.
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
+
+
+## Judge Console
+
+The ACT III judge-facing frontend is a cinematic, evidence-first operations console for the Bellini → Gemma on AMD → Evolus → InnerOS Evidence pipeline.
+
+Run:
+
+    python -m pip install -e .
+    python -m inneros_act3.judge_console
+
+Open http://127.0.0.1:8765.
+
+The console supports a fresh live execution, an explicit LIVE VERIFIED replay, and a clearly labeled offline mock mode. See docs/JUDGE_CONSOLE.md.
