@@ -12,8 +12,8 @@ import json
 import sys
 
 from .dual_prize import run_dual_prize_pipeline
-from .evolus_adapter import evolus_smoke
-from .token_factory_provider import token_factory_smoke
+from .evolus_adapter import evolus_smoke, get_evolus_credential
+from .token_factory_provider import get_token_factory_credential, token_factory_smoke
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -46,14 +46,43 @@ def main(argv: list[str] | None = None) -> int:
         results["tracks"]["evolus_partner"] = evolus_res
 
     if args.dual or args.all:
-        dual_res = run_dual_prize_pipeline(gemma_mock=mock_mode, evolus_mock=mock_mode)
-        results["tracks"]["dual_prize_pipeline"] = dual_res.manifest()
+        if mock_mode:
+            dual_res = run_dual_prize_pipeline(gemma_mock=True, evolus_mock=True)
+            results["tracks"]["dual_prize_pipeline"] = dual_res.manifest()
+        else:
+            tf_key, _ = get_token_factory_credential()
+            ev_key, _ = get_evolus_credential()
+            if not tf_key or not ev_key:
+                missing = []
+                if not tf_key:
+                    missing.append("AMD_TOKEN_FACTORY_API_KEY (owner_vault:amd_token_factory/api_key)")
+                if not ev_key:
+                    missing.append("EVOLUS_API_KEY (owner_vault:evolus/api_key)")
+                results["tracks"]["dual_prize_pipeline"] = {
+                    "track": "dual_prize_pipeline",
+                    "status": "BLOCKED",
+                    "eligibility": "NO_CREDENTIAL_BLOCKED",
+                    "blocker_reason": f"Missing credentials required for live dual-demo: {', '.join(missing)}",
+                    "missing_credentials": missing,
+                    "safe_fallback": "Run without --live for automated offline mock verification",
+                }
+            else:
+                try:
+                    dual_res = run_dual_prize_pipeline(gemma_mock=False, evolus_mock=False)
+                    results["tracks"]["dual_prize_pipeline"] = dual_res.manifest()
+                except Exception as exc:
+                    results["tracks"]["dual_prize_pipeline"] = {
+                        "track": "dual_prize_pipeline",
+                        "status": "BLOCKED",
+                        "eligibility": "LIVE_CALL_FAILED",
+                        "error": str(exc),
+                    }
 
     if args.json:
         print(json.dumps(results, indent=2))
     else:
         print("======================================================================")
-        print(" AMD HACKATHON ACT III — PARTNER TRACK VERIFICATION REPORT")
+        print(" AMD HACKATHON ACT III - PARTNER TRACK VERIFICATION REPORT")
         print(f" Execution Mode: {'LIVE (external APIs)' if args.live else 'MOCK (deterministic offline)'}")
         print("======================================================================")
         for name, data in results["tracks"].items():

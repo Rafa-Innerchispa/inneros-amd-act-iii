@@ -63,6 +63,10 @@ class DualPrizePipelineTests(unittest.TestCase):
         self.assertEqual(smoke_main(["--evolus", "--json"]), 0)
         self.assertEqual(smoke_main(["--dual", "--json"]), 0)
 
+    def test_smoke_cli_runner_live_mode_blocked_graceful(self):
+        exit_code = smoke_main(["--all", "--live", "--json"])
+        self.assertEqual(exit_code, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
