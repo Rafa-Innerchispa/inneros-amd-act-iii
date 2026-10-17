@@ -14,6 +14,7 @@ authors = [{name = "InnerOS Labs"}]
 [project.scripts]
 act3-smoke = "inneros_act3.smoke:main"
 act3-judge = "inneros_act3.judge_console:main"
+act3-server = "inneros_act3.server:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
