@@ -40,20 +40,24 @@ Not yet proven for the new programming phrase:
 - physical Echo spoken confirmation;
 - final agent completion for canonical `draftd0f` task.
 
-## Pending exact evidence
+## Reconciled local evidence
 
 ### Local AMD benchmark
-Final p50 and tok/s must come from:
-`hackathon_amd_inference_benchmark.json`
+**MEASURED** from canonical `hackathon_amd_inference_benchmark.json`:
+- 20 inference runs;
+- p50 `0.2622 s`;
+- p95 `0.2638 s`;
+- throughput `22.85 tok/s`;
+- Radeon AI PRO R9700, ROCm, vLLM and Qwen3-Coder AWQ.
 
-Do not use historical HyperLoom numbers.
+These are latency/throughput measurements, not power-efficiency results.
 
-### Multi-agent concurrency
-Final claim depends on:
-`coordination_cross_test_report.json`
+### Multi-agent coordination
+**VERIFIED CROSS-TEST COVERAGE** from `coordination_cross_test_report.json`:
+- 6 external checks passed;
+- 8 Dev Swarm lanes passed with unique nonces.
 
-Without exact proof, wording remains:
-**Multi-agent coordination — engineering track**
+This does not establish eight simultaneously active agents.
 
 ## Scenario estimate
 The 43 min / 95.56% Human Time Returned figure is a **scenario baseline estimate**.

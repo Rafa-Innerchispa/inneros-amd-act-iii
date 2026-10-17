@@ -36,7 +36,9 @@ AMD is both an execution platform and a compute choice inside InnerOS.
 
 The ACT III partner proof uses **AMD Developer Cloud / ROCm** with Gemma-4-31B-IT.
 
-The broader InnerOS architecture also includes local AMD execution with Radeon AI PRO R9700, vLLM and Qwen3-Coder AWQ. Final public performance numbers for that local lane must be copied exactly from the canonical Intel benchmark JSON. No older benchmark may be substituted.
+The broader InnerOS architecture also includes local AMD execution with Radeon AI PRO R9700, vLLM and `QuantTrio/Qwen3-Coder-30B-A3B-Instruct-AWQ`. The canonical N=20 evidence records **0.2622 s p50**, **0.2638 s p95**, and **22.85 tokens/s**. These figures describe measured inference latency and throughput; they do not make a power-efficiency claim.
+
+The coordination cross-test passed **6 external agent checks and 8 Dev Swarm lanes with unique nonces**. That is verified cross-test coverage, not a claim of eight agents executing simultaneously.
 
 ## Why Gemma
 Gemma acts as the incident reasoning layer for the demonstrated workflow.
@@ -166,7 +168,9 @@ If Cloudflare is blocked, a zero-cost static Verified Replay may be served from 
 `https://github.com/Rafa-Innerchispa/inneros-amd-act-iii`
 
 ## Application URL
-**PENDING EXTERNAL HTTP VERIFICATION**
+**https://rafa-innerchispa.github.io/inneros-amd-act-iii/**
+
+Verified externally with HTTP 200 on October 16, 2026. This public build is explicitly a **LIVE VERIFIED · REPLAY** experience.
 
 ## Truth boundary
 See `submission/FINAL_SOURCE_OF_TRUTH.md` and `docs/TRUTH_AND_SCOPE.md`.

@@ -41,13 +41,11 @@ Open:
 `http://127.0.0.1:8765`
 
 ### Public demo
-Preferred final hostname:
+Verified public demo:
 
-`https://inneros-act3.creatorcore.ai/`
+**https://rafa-innerchispa.github.io/inneros-amd-act-iii/**
 
-**Status: PENDING EXTERNAL HTTP VERIFICATION.**
-
-If Cloudflare is unavailable, the project may publish a zero-cost static **LIVE VERIFIED · REPLAY** build. Static replay never pretends to execute a fresh provider call.
+GitHub Pages was used as the zero-cost fallback after inspecting the existing Cloudflare setup and avoiding changes to unrelated production tunnels. External HTTP 200 and the frozen hero/metrics were verified on October 16, 2026. The static build is explicitly **LIVE VERIFIED · REPLAY** and never pretends to execute a fresh provider call.
 
 ## Why AMD
 
@@ -58,7 +56,9 @@ InnerOS also has a local AMD execution lane using:
 - vLLM
 - Qwen3-Coder AWQ
 
-Final N=20 p50 and tok/s values are published only from the canonical Intel evidence JSON. Historical benchmark numbers are intentionally excluded.
+Canonical Intel evidence records 20 local inference runs at **0.2622 s p50**, **0.2638 s p95**, and **22.85 tokens/s**. The lane uses `QuantTrio/Qwen3-Coder-30B-A3B-Instruct-AWQ` through vLLM/ROCm on a Radeon AI PRO R9700. These are measured inference results, not power-efficiency claims.
+
+The coordination cross-test also passed **6 external checks and 8 Dev Swarm lanes with unique nonces**. This describes verified coverage, not eight simultaneously active agents.
 
 ## Verified partner evidence
 

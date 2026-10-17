@@ -64,7 +64,7 @@ Only those JSON values may be used for the final AMD performance slide:
 - tokens/second
 
 **Do not substitute older HyperLoom or unrelated R9700 benchmarks.**
-Until read from the JSON, the numerical p50/tok-s fields remain **PENDING EXACT EVIDENCE**.
+Canonical N=20 result: **0.2622 s p50**, **0.2638 s p95**, and **22.85 tokens/s** using `QuantTrio/Qwen3-Coder-30B-A3B-Instruct-AWQ` through vLLM/ROCm on Radeon AI PRO R9700. These are inference latency/throughput measurements, not power-efficiency results.
 
 ## 4. Alexa / Inner Oz → InnerOS → agents
 
@@ -134,7 +134,10 @@ Preferred hostname:
 
 Another owner-approved hostname under an existing zone is acceptable if the preferred name conflicts.
 
-A Cloudflare URL is **VERIFIED only after external HTTP 200 succeeds**.
+A public URL is **VERIFIED only after external HTTP 200 succeeds**.
+
+Verified zero-cost fallback (external HTTP 200 on October 16, 2026):
+`https://rafa-innerchispa.github.io/inneros-amd-act-iii/`
 
 ### Current Cloudflare infrastructure truth
 - MCP Small Cloudflare capability is **not currently available**.
@@ -242,7 +245,7 @@ Forbidden wording:
 Do not claim 4 or 8 simultaneously active agents as a final demonstrated ACT III fact unless the exact `coordination_cross_test_report.json` proves that claim and the final submission text cites that evidence faithfully.
 
 Allowed:
-**Multi-agent coordination — engineering track**
+**Multi-agent coordination cross-test — VERIFIED: 6 external checks and 8 Dev Swarm lanes with unique nonces.** This is coverage evidence, not proof of eight simultaneously active agents.
 
 Forbidden without exact proof:
 - “8 agents running simultaneously”
@@ -259,10 +262,10 @@ Forbidden without exact proof:
 | Bellini incident lane | VERIFIED DEMO LANE | ACT III repo evidence | real-world Bellini scenario | uncontrolled production mutation |
 | Alexa creates repo + Ops Task | VERIFIED | Ambient Guardian main + signed simulator | Voice-to-governed-work verified | agent finished code unless terminal |
 | New programming phrase on physical Echo | PENDING | owner spoken confirmation required | pending physical confirmation | LIVE_VERIFIED today |
-| Local AMD R9700 benchmark | PENDING EXACT NUMBERS | Intel benchmark JSON | exact JSON values only | old/derived benchmark values |
+| Local AMD R9700 benchmark | MEASURED | Intel benchmark JSON | N=20 p50 0.2622 s; p95 0.2638 s; 22.85 tok/s | old/derived or efficiency values |
 | HTR 43 min / 95.56% | SCENARIO BASELINE | dual-prize scenario | scenario baseline estimate | measured productivity fact |
 | 4/8 simultaneous agents | ENGINEERING TRACK unless JSON proves | cross-test JSON | architecture / engineering track | verified live swarm without proof |
-| Cloudflare public demo | PENDING until HTTP 200 | DNS/tunnel/external request | public demo once verified | operational before public HTTP proof |
+| Public demo | LIVE VERIFIED · REPLAY | GitHub Pages workflow + external HTTP 200 | https://rafa-innerchispa.github.io/inneros-amd-act-iii/ | fresh LIVE execution |
 
 ## 13. Repository storage map
 

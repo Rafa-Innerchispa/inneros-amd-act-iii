@@ -64,9 +64,7 @@ Show canonical demo repo:
 **Visual:** Radeon AI PRO R9700 / vLLM / Qwen3-Coder AWQ.
 
 **Narration:**
-“Our broader compute fabric also runs local AI workloads on AMD hardware. The final benchmark shown here uses twenty measured runs from our canonical evidence set.”
-
-Insert exact p50 and tok/s from `hackathon_amd_inference_benchmark.json` only.
+“Our broader compute fabric also runs local AI workloads on a Radeon AI PRO R9700 with ROCm and vLLM. Across twenty measured inference runs, the canonical evidence records a 0.2622-second p50, a 0.2638-second p95, and 22.85 tokens per second.”
 
 ## 1:50–2:00 — Close
 **Visual:** return to InnerOS hero.

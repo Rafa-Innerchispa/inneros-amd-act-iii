@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#05070b">
-  <title>InnerOS — Live Intelligent Operations</title>
-  <link rel="stylesheet" href="/assets/styles.css">
+  <title>InnerOS — Governed AI Operations on AMD</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/final.css">
 </head>
 <body>
   <canvas id="compute-fabric" aria-hidden="true"></canvas>
@@ -15,7 +16,7 @@
     <header class="topbar">
       <div class="brand-lockup">
         <div class="brand">Inner<span>OS</span></div>
-        <div class="subtitle">Live Intelligent Operations</div>
+        <div class="subtitle">Governed AI Operations on AMD</div>
       </div>
       <nav class="topnav" aria-label="Console sections">
         <button class="nav-item active" data-scroll="operations">Operations</button>
@@ -30,6 +31,20 @@
         <div class="truth-caption">AI reasoned · human governed · evidence captured</div>
       </div>
     </header>
+
+    <section class="frozen-hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow blue">AMD Developer Hackathon · ACT III</div>
+        <h1 id="hero-title">Governed AI Operations on AMD</h1>
+        <p>Reason. Act. Prove.</p>
+      </div>
+      <div class="hero-proof" aria-label="Verified capabilities">
+        <span>Gemma <strong>LIVE VERIFIED</strong></span>
+        <span>Evolus <strong>LIVE VERIFIED</strong></span>
+        <span>Evidence <strong>REPLAYABLE</strong></span>
+      </div>
+      <button class="hero-cta" data-scroll="operations">Watch InnerOS resolve a real incident ↓</button>
+    </section>
 
     <section class="hero-grid" id="operations">
       <aside class="incident-rail panel">
@@ -206,11 +221,31 @@
       <div><span>InnerOS Evidence</span><strong>REPLAYABLE</strong><small>SHA-256 execution bundle + truth labels</small></div>
     </section>
 
+    <section class="proof-grid" aria-label="Additional verified InnerOS capabilities">
+      <article class="panel proof-card">
+        <div class="eyebrow blue">LOCAL AMD EXECUTION · MEASURED</div>
+        <h2>Radeon AI PRO R9700</h2>
+        <p>Qwen3-Coder-30B-A3B-Instruct-AWQ · vLLM · ROCm</p>
+        <div class="metric-row"><span><strong>0.2622 s</strong> N=20 p50</span><span><strong>0.2638 s</strong> p95</span><span><strong>22.85</strong> tok/s</span></div>
+      </article>
+      <article class="panel proof-card">
+        <div class="eyebrow cyan">VOICE TO GOVERNED WORK</div>
+        <h2>Inner Oz → InnerOS → GitHub + Ops</h2>
+        <p>Signed simulator proof created the canonical demo repository and governed task. Physical Echo confirmation and assigned coding completion remain pending.</p>
+        <a href="https://github.com/Rafa-Innerchispa/inneros-alexa-amd-draftd0f" target="_blank" rel="noreferrer">Inspect the voice-created repository ↗</a>
+      </article>
+      <article class="panel proof-card">
+        <div class="eyebrow green">COORDINATION CROSS-TEST · VERIFIED</div>
+        <h2>6 external checks · 8 swarm lanes</h2>
+        <p>All checks passed with unique nonces. This is cross-test coverage, not a claim of eight simultaneously active agents.</p>
+      </article>
+    </section>
+
     <footer>
       <span>InnerOS Labs · AMD Developer Hackathon ACT III</span>
       <span id="connection-state">Console ready</span>
     </footer>
   </main>
-  <script src="/assets/app.js"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
