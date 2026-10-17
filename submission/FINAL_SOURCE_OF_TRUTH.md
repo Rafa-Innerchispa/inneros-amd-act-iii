@@ -278,7 +278,40 @@ These files form the final submission package:
 - `README.md`
 - `docs/demo/` static Verified Replay when used.
 
-## 14. Final success criteria
+## 14. Build lineage / originality boundary
+
+The submission must explicitly distinguish three categories:
+
+### Pre-existing before ACT III
+- InnerOS control plane and governance.
+- MCP/A2A and local execution plane.
+- local AMD ROCm/vLLM/Qwen execution.
+- evidence/replay design.
+- Human Time Returned design.
+- Bellini as an existing real-world operational context.
+
+### Built or integrated during ACT III
+- AMD Developer Cloud + Gemma live integration.
+- structured IncidentPlan contract.
+- Evolus MCP + Workflow + Knowledge Library integration.
+- Bellini → Gemma → Evolus → Evidence end-to-end partner pipeline.
+- ACT III-specific evidence bundle and partner verification.
+- Judge Console.
+- container/static/public demo packaging.
+- final submission/video/deck/cover/truth package.
+
+### Reused from the parallel Alexa hackathon
+- Inner Oz / Alexa interface.
+- real energy/status queries.
+- governed physical-action pattern.
+- voice → GitHub repo + InnerOS Ops Task programming dispatch.
+
+ACT III references that Alexa capability as proof that InnerOS is reusable across interfaces; it does not claim the Alexa implementation was created entirely inside ACT III.
+
+Full lineage:
+`docs/ACT3_BUILD_LINEAGE.md`
+
+## 15. Final success criteria
 
 Submission is ready only when:
 - all submission docs are consistent with this file;
