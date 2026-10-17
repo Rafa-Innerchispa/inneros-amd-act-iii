@@ -40,8 +40,8 @@
 - [x] canonical Alexa demo repo recorded
 - [x] local AMD benchmark JSON values inserted
 - [x] coordination cross-test truth reconciled
-- [ ] final branch SHA recorded
-- [ ] PR recorded
+- [x] implementation SHA recorded: `5ee41fe94f5690490e8d8fd6ee79b1a2e0e7a041`
+- [x] PR recorded: `https://github.com/Rafa-Innerchispa/inneros-amd-act-iii/pull/8`
 - [x] CI green
 - [x] secret scan green
 
