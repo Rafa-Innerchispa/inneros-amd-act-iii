@@ -156,7 +156,9 @@ If Cloudflare is blocked, a zero-cost static Verified Replay may be served from 
 `https://github.com/Rafa-Innerchispa/inneros-amd-act-iii`
 
 ## Application URL
-**PENDING EXTERNAL HTTP VERIFICATION**
+**https://rafa-innerchispa.github.io/inneros-amd-act-iii/**
+
+Verified externally with HTTP 200 on October 16, 2026. This public build is explicitly a **LIVE VERIFIED · REPLAY** experience.
 
 ## Truth boundary
 See `submission/FINAL_SOURCE_OF_TRUTH.md` and `docs/TRUTH_AND_SCOPE.md`.

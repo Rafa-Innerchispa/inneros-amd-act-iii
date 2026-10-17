@@ -41,13 +41,11 @@ Open:
 `http://127.0.0.1:8765`
 
 ### Public demo
-Preferred final hostname:
+Verified public demo:
 
-`https://inneros-act3.creatorcore.ai/`
+**https://rafa-innerchispa.github.io/inneros-amd-act-iii/**
 
-**Status: publication workflow prepared; external HTTP verification pending.**
-
-If Cloudflare is unavailable, the project may publish a zero-cost static **LIVE VERIFIED · REPLAY** build. Static replay never pretends to execute a fresh provider call.
+GitHub Pages was used as the zero-cost fallback after inspecting the existing Cloudflare setup and avoiding changes to unrelated production tunnels. External HTTP 200 and the frozen hero/metrics were verified on October 16, 2026. The static build is explicitly **LIVE VERIFIED · REPLAY** and never pretends to execute a fresh provider call.
 
 ## Why AMD
 

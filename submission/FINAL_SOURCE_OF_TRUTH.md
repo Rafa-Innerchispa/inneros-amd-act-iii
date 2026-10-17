@@ -134,7 +134,10 @@ Preferred hostname:
 
 Another owner-approved hostname under an existing zone is acceptable if the preferred name conflicts.
 
-A Cloudflare URL is **VERIFIED only after external HTTP 200 succeeds**.
+A public URL is **VERIFIED only after external HTTP 200 succeeds**.
+
+Verified zero-cost fallback (external HTTP 200 on October 16, 2026):
+`https://rafa-innerchispa.github.io/inneros-amd-act-iii/`
 
 ### Current Cloudflare infrastructure truth
 - MCP Small Cloudflare capability is **not currently available**.
@@ -262,7 +265,7 @@ Forbidden without exact proof:
 | Local AMD R9700 benchmark | MEASURED | Intel benchmark JSON | N=20 p50 0.2622 s; p95 0.2638 s; 22.85 tok/s | old/derived or efficiency values |
 | HTR 43 min / 95.56% | SCENARIO BASELINE | dual-prize scenario | scenario baseline estimate | measured productivity fact |
 | 4/8 simultaneous agents | ENGINEERING TRACK unless JSON proves | cross-test JSON | architecture / engineering track | verified live swarm without proof |
-| Cloudflare public demo | PENDING until HTTP 200 | DNS/tunnel/external request | public demo once verified | operational before public HTTP proof |
+| Public demo | LIVE VERIFIED · REPLAY | GitHub Pages workflow + external HTTP 200 | https://rafa-innerchispa.github.io/inneros-amd-act-iii/ | fresh LIVE execution |
 
 ## 13. Repository storage map
 
