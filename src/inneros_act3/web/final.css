@@ -1,0 +1,33 @@
+.frozen-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+  gap: 24px;
+  align-items: end;
+  margin-top: 16px;
+  padding: clamp(28px, 5vw, 72px);
+  min-height: 390px;
+  border: 1px solid rgba(75, 151, 255, .22);
+  border-radius: 24px;
+  background: radial-gradient(circle at 80% 18%, rgba(47, 140, 255, .22), transparent 28%), linear-gradient(135deg, rgba(12, 26, 48, .92), rgba(5, 9, 16, .86));
+  box-shadow: var(--shadow);
+}
+.frozen-hero h1 { max-width: 900px; margin: 12px 0 8px; font-size: clamp(2.8rem, 6vw, 6.6rem); line-height: .92; letter-spacing: -.065em; }
+.frozen-hero > div > p { margin: 0; color: #d7e7ff; font-size: clamp(1.2rem, 2vw, 2rem); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.hero-proof { display: grid; gap: 9px; }
+.hero-proof span { display: flex; justify-content: space-between; gap: 18px; padding: 12px 14px; border: 1px solid rgba(69, 242, 164, .18); border-radius: 10px; color: #92a3bb; background: rgba(3, 11, 18, .45); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+.hero-proof strong { color: var(--green); }
+.hero-cta { grid-column: 1 / -1; justify-self: start; padding: 12px 18px; border: 1px solid rgba(47, 140, 255, .4); border-radius: 999px; color: white; background: rgba(47, 140, 255, .12); cursor: pointer; }
+.proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.proof-card { padding: 20px; min-height: 205px; }
+.proof-card h2 { margin: 10px 0 6px; font-size: 1.1rem; }
+.proof-card p { color: #8091aa; font-size: .75rem; line-height: 1.55; }
+.proof-card a { color: #64b7ff; font-size: .72rem; text-decoration: none; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.metric-row span { padding: 8px 10px; border-radius: 9px; background: rgba(47, 140, 255, .07); border: 1px solid rgba(47, 140, 255, .14); font-size: .66rem; color: #8396b1; }
+.metric-row strong { display: block; color: white; font-size: .9rem; }
+.rail-actions button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+@media (max-width: 900px) {
+  .frozen-hero, .proof-grid { grid-template-columns: 1fr; }
+  .frozen-hero { min-height: 0; padding: 28px 22px; }
+  .hero-cta { width: 100%; }
+}

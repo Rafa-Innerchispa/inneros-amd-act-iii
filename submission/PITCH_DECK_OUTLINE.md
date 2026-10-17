@@ -37,8 +37,9 @@ Show:
 - vLLM
 - Qwen3-Coder AWQ
 - **N = 20 measured runs**
-- **p50 = [EXACT JSON VALUE]**
-- **throughput = [EXACT JSON tok/s]**
+- **p50 = 0.2622 s**
+- **p95 = 0.2638 s**
+- **throughput = 22.85 tok/s**
 
 Small truth label:
 **Measured local execution. Exact values sourced from canonical Intel evidence JSON.**

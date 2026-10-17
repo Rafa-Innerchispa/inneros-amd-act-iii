@@ -196,6 +196,11 @@ function renderPayload(payload) {
 }
 
 async function fetchJson(url, options) {
+  if (window.INNEROS_STATIC_REPLAY) {
+    if (url === "/api/replay") return structuredClone(window.INNEROS_STATIC_REPLAY);
+    if (url === "/api/status") return { status: "READY", last_verified: { truth: "LIVE_VERIFIED_REPLAY" } };
+    return { truth: "BLOCKED", message: "Fresh provider execution is disabled in the public static replay. Use Replay Verified Run." };
+  }
   const response = await fetch(url, options || {});
   const payload = await response.json().catch(() => ({ truth: "BLOCKED", message: "Invalid server response" }));
   if (!response.ok && !payload.truth) payload.truth = "BLOCKED";
@@ -249,7 +254,7 @@ $("#copy-hash").addEventListener("click", async () => {
   }
 });
 
-$$(".nav-item").forEach((button) => {
+$$("[data-scroll]").forEach((button) => {
   button.addEventListener("click", () => {
     const id = button.dataset.scroll;
     const target = document.getElementById(id);
@@ -331,6 +336,13 @@ function initFabric() {
 async function boot() {
   initFabric();
   resetStages();
+  if (window.INNEROS_STATIC_REPLAY) {
+    $("#run-live").disabled = true;
+    $("#run-live").textContent = "Live run unavailable in static replay";
+    $("#run-mock").disabled = true;
+    $("#run-mock").textContent = "Mock disabled on public proof";
+    setTruth("LIVE_VERIFIED_REPLAY", "Public static replay ready");
+  }
   try {
     const status = await fetchJson("/api/status");
     if (status.last_verified && status.last_verified.truth) {

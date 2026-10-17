@@ -36,7 +36,9 @@ AMD is both an execution platform and a compute choice inside InnerOS.
 
 The ACT III partner proof uses **AMD Developer Cloud / ROCm** with Gemma-4-31B-IT.
 
-The broader InnerOS architecture also includes local AMD execution with Radeon AI PRO R9700, vLLM and Qwen3-Coder AWQ. Final public performance numbers for that local lane must be copied exactly from the canonical Intel benchmark JSON. No older benchmark may be substituted.
+The broader InnerOS architecture also includes local AMD execution with Radeon AI PRO R9700, vLLM and `QuantTrio/Qwen3-Coder-30B-A3B-Instruct-AWQ`. The canonical N=20 evidence records **0.2622 s p50**, **0.2638 s p95**, and **22.85 tokens/s**. These figures describe measured inference latency and throughput; they do not make a power-efficiency claim.
+
+The coordination cross-test passed **6 external agent checks and 8 Dev Swarm lanes with unique nonces**. That is verified cross-test coverage, not a claim of eight agents executing simultaneously.
 
 ## Why Gemma
 Gemma acts as the incident reasoning layer for the demonstrated workflow.
