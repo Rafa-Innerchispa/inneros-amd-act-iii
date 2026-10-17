@@ -112,6 +112,18 @@ A current scenario baseline estimates:
 
 This is a **scenario baseline estimate**, not an independently measured productivity benchmark.
 
+## What we reused vs. what we built during ACT III
+
+InnerOS existed before this hackathon. We intentionally used ACT III to prove that an existing governed AI operations platform could absorb new AMD and partner capabilities instead of rebuilding a one-off demo.
+
+**Pre-existing and reused:** InnerOS governance/control plane, MCP/A2A, local AMD ROCm/vLLM/Qwen execution, evidence/replay concepts, and Bellini as a real operational workload.
+
+**Built or integrated during ACT III:** AMD Developer Cloud + Gemma live inference, the structured IncidentPlan contract, live Evolus Workflow + Knowledge Library integration, the Bellini→Gemma→Evolus→Evidence partner pipeline, the ACT III evidence bundle, Judge Console, and the public/containerized submission package.
+
+**Reused from our parallel Alexa hackathon:** Inner Oz/Alexa as a real natural-language interface, including voice-to-GitHub and voice-to-governed-Ops-Task. That code remains in Ambient Guardian; ACT III references it as proof that the same InnerOS platform can serve multiple interfaces.
+
+This distinction is documented in `docs/ACT3_BUILD_LINEAGE.md`.
+
 ## Originality
 The differentiator is not one model or one cloud endpoint.
 
