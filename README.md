@@ -1,165 +1,172 @@
-# InnerOS Labs — AMD Developer Hackathon ACT III
+# INNEROS
 
-<!-- INNEROS-NARRATIVE:START -->
-> **InnerOS role:** R&D / Infrastructure Validation  
-> **Lifecycle:** Experimental / hackathon track  
-> **Lineage:** AMD ACT III workstream validating sovereign local inference, ROCm routing, execution evidence, and replay.
->
-> The reusable outcome belongs to the InnerOS sovereign-compute layer: local-first inference with explicit routing, cost, privacy, and evidence boundaries.
->
-> **InnerOS principle:** hackathons are validation environments. Reusable capabilities are extracted into maintained products and platform layers rather than treated as disconnected one-off projects.
-<!-- INNEROS-NARRATIVE:END -->
+## Governed AI Operations on AMD
 
+### **Reason. Act. Prove.**
 
-**Local-First Agentic Infrastructure on AMD**
+**Gemma LIVE VERIFIED · Evolus LIVE VERIFIED · Evidence REPLAYABLE**
 
-InnerOS AMD ACT III is an auditable local-first agentic compute fabric designed to route autonomous AI workloads across AMD edge and cloud infrastructure while preserving the evidence needed to understand, verify and replay every execution.
+> **Companies don’t need another AI chat. They need AI that can reason, act and prove what it did.**
 
-## One-line pitch
+InnerOS is a local-first AI operations fabric that turns AMD-hosted intelligence into governed real-world action with policy, human boundaries, verification and replay.
 
-> An auditable local-first agentic compute fabric that routes autonomous AI workloads across AMD edge and cloud GPUs, records why each decision was made, and makes every run replayable.
+### The ACT III proof
 
-## Why this project exists
+```text
+Bellini incident
+      ↓
+Gemma-4-31B-IT
+AMD Developer Cloud / ROCm
+      ↓
+structured IncidentPlan
+      ↓
+Evolus Workflow + Knowledge Library
+      ↓
+InnerOS Evidence / Replay
+```
 
-Most agent demos show what a model answered. InnerOS aims to show **where the work ran, why it ran there, what the agent saw, what it did, how long it took, what it cost, and whether the execution can be independently verified later**.
+The judge can inspect a fresh live path, replay a previously verified run, or use a clearly labeled mock. Those states are intentionally different.
 
-That turns AI infrastructure from a black box into an inspectable execution fabric.
+## Watch InnerOS resolve a real incident
 
-## Target AMD stack
+Run locally:
 
-- AMD ROCm
-- local AMD GPU execution
-- vLLM + Qwen workloads
-- AMD Developer Cloud for elastic execution
-- multi-agent orchestration through MCP/A2A-compatible boundaries
-- machine-readable performance and routing evidence
+```bash
+python -m pip install -e .
+python -m inneros_act3.judge_console
+```
 
-Exact ACT III cloud hardware and track-specific AMD technologies will be recorded after the official tracks and access details are published.
+Open:
+
+`http://127.0.0.1:8765`
+
+### Public demo
+Preferred final hostname:
+
+`https://inneros-act3.creatorcore.ai/`
+
+**Status: PENDING EXTERNAL HTTP VERIFICATION.**
+
+If Cloudflare is unavailable, the project may publish a zero-cost static **LIVE VERIFIED · REPLAY** build. Static replay never pretends to execute a fresh provider call.
+
+## Why AMD
+
+ACT III uses **Gemma-4-31B-IT through AMD Developer Cloud / ROCm** for the verified reasoning lane.
+
+InnerOS also has a local AMD execution lane using:
+- Radeon AI PRO R9700
+- vLLM
+- Qwen3-Coder AWQ
+
+Final N=20 p50 and tok/s values are published only from the canonical Intel evidence JSON. Historical benchmark numbers are intentionally excluded.
+
+## Verified partner evidence
+
+### Gemma
+- **LIVE_VERIFIED**
+- model: `Gemma-4-31B-IT`
+- endpoint: `https://developer.amd.com.cn/radeon/api/v1`
+- completion ID: `615398e579fb46e8be320f66c82e4b31`
+- 12 available models discovered
+
+### Evolus
+- **LIVE_VERIFIED**
+- MCP: `https://api.evolus.ai/mcp`
+- server: Evolus2 Data Server v1.0.0
+- application: InnerOS
+- app ID: `80dfecd4-8474-4aad-9565-5b7a2be10ea4`
+- building blocks: `workflow`, `knowledge_library`
+
+### Evidence
+Verified dual-prize bundle:
+
+`6ee36d6905929b176fd9c49f3c1a4aa165df4a8231d5047871f581eb73b3f845`
+
+## Voice becomes governed work
+
+A connected InnerOS capability demonstrates a second interface:
+
+```text
+Alexa / Inner Oz
+      ↓
+InnerOS
+      ↓
+GitHub repo + governed Ops Task
+      ↓
+selected AI agent
+      ↓
+AMD local execution lane
+```
+
+Canonical voice-created demo repo:
+
+`https://github.com/Rafa-Innerchispa/inneros-alexa-amd-draftd0f`
+
+The GitHub repository and Ops Task creation are verified. Agent completion is not claimed until terminal evidence exists.
+
+> **Alexa does not execute infrastructure. Alexa talks to InnerOS. InnerOS decides what is allowed to happen.**
+
+## Governance is the product
+
+InnerOS separates:
+- reasoning;
+- policy;
+- approval;
+- execution;
+- verification;
+- evidence.
+
+Models and interfaces can change. The governance fabric remains.
+
+## Human Time Returned
+
+Current scenario baseline:
+- manual baseline: 2700 s
+- active human: 120 s
+- returned: 2580 s
+- automation: 95.56%
+
+This is a **scenario baseline estimate**, not an independently measured productivity benchmark.
+
+## Submission package
+
+- [Final Source of Truth](submission/FINAL_SOURCE_OF_TRUTH.md)
+- [Final Submission Copy](submission/SUBMISSION_FINAL.md)
+- [Final Video Script](submission/VIDEO_SCRIPT_FINAL.md)
+- [Pitch Deck Outline](submission/PITCH_DECK_OUTLINE.md)
+- [Cover Brief](submission/COVER_BRIEF.md)
+- [Final Checklist](submission/FINAL_CHECKLIST.md)
+- [Truth and Scope](docs/TRUTH_AND_SCOPE.md)
 
 ## Architecture
 
 ```text
-User / Workflow
-      |
-      v
-InnerOS Control Plane
-      |
-      +--> Policy + Capability Router
-      |        |
-      |        +--> AMD Edge / Local ROCm
-      |        +--> AMD Cloud Compute
-      |
-      +--> Multi-Agent Execution
-      |
-      +--> Decision Evidence
-      +--> Human Time Returned
-      +--> Forensic Replay
+Human / Workflow / Voice
+          │
+          ▼
+        InnerOS
+Policy · Identity · Governance · Evidence
+    │                    │
+    ▼                    ▼
+AMD intelligence      Real systems
+Gemma / Qwen          GitHub / workflows
+    │                    │
+    └──────────┬─────────┘
+               ▼
+        Verify + Replay
 ```
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+## Truth labels
 
-## Current seed implementation
+- **LIVE_VERIFIED**
+- **VERIFIED**
+- **LIVE_VERIFIED_REPLAY**
+- **MOCK**
+- **PENDING**
+- **ENGINEERING_TRACK**
 
-The repository already contains a dependency-light Python reference core that demonstrates:
-
-- local-first routing;
-- privacy fail-closed behavior;
-- elastic-capacity routing to cloud;
-- availability fallback;
-- structured routing reason codes;
-- canonical evidence serialization;
-- SHA-256 evidence verification;
-- deterministic unit tests;
-- GitHub Actions CI.
-
-This seed is intentionally provider-neutral before ACT III. The hackathon-period work will connect the core to the final AMD local/cloud runtime and visual demo.
-
-## Run it
-
-```bash
-python -m pip install -e .
-python -m unittest discover -s tests -v
-python -m inneros_act3.demo
-```
-
-## Pre-hackathon originality boundary
-
-This repository is being prepared before ACT III. Existing InnerOS capabilities are documented separately in [`docs/PRE_HACKATHON_BASELINE.md`](docs/PRE_HACKATHON_BASELINE.md).
-
-Immediately before kickoff we will freeze the exact baseline SHA/tag. Final submission claims will distinguish:
-
-- **pre-existing** building blocks;
-- **integrated during ACT III** capabilities;
-- **newly built during ACT III** features.
-
-Experimental AMD compatibility will not be described as official upstream support unless that becomes factually true.
-
-## Success criteria
-
-A strong final demo should prove:
-
-1. a real workload runs on AMD infrastructure;
-2. workloads can route between local AMD and AMD cloud based on policy/capability;
-3. routing reasons are captured in structured evidence;
-4. execution metrics are measured and machine-readable;
-5. historical evidence can be verified offline;
-6. a multi-agent workflow works end to end;
-7. the visual UI makes edge-to-cloud movement understandable in seconds;
-8. business value is visible through Human Time Returned, cost and quality metrics.
-
-## Repository map
-
-```text
-src/inneros_act3/           routing + evidence seed
-tests/                      deterministic tests
-docs/ARCHITECTURE.md        working architecture
-docs/PRE_HACKATHON_BASELINE.md
-                            originality boundary
-docs/ROADMAP.md             execution plan
-submission/PROJECT_DESCRIPTION.md
-                            LabLab copy draft
-submission/DEMO_CHECKLIST.md
-                            judge/demo checklist
-submission/VIDEO_SCRIPT.md  3-minute video draft
-.github/workflows/ci.yml     CI
-```
-
-## Current event state
-
-ACT III is scheduled for October 2026. The official LabLab page currently lists the judging dimensions as **Application of Technology, Presentation, Business Value and Originality**. Tracks are still TBA as of this pre-hackathon preparation phase, so the project is intentionally not locked to one track yet.
-
-Official event page: https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii
-
-## Truth boundary
-
-Project claims use explicit evidence states:
-
-- **PROVEN** — reproduced with evidence;
-- **PARTIAL** — some acceptance criteria remain;
-- **CONTRACT-ONLY** — interface exists, live integration not proven;
-- **PLANNED** — design only.
-
-No benchmark claim is considered proven without reproducible evidence.
-
-## Team
-
-**InnerOS Labs**  
-Building local-first, auditable agentic infrastructure.
+See `docs/TRUTH_AND_SCOPE.md` before changing public claims.
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
-
-
-## Judge Console
-
-The ACT III judge-facing frontend is a cinematic, evidence-first operations console for the Bellini → Gemma on AMD → Evolus → InnerOS Evidence pipeline.
-
-Run:
-
-    python -m pip install -e .
-    python -m inneros_act3.judge_console
-
-Open http://127.0.0.1:8765.
-
-The console supports a fresh live execution, an explicit LIVE VERIFIED replay, and a clearly labeled offline mock mode. See docs/JUDGE_CONSOLE.md.
+MIT.
