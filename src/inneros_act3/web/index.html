@@ -3,218 +3,754 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#05070b">
-  <title>InnerOS — Live Intelligent Operations</title>
+  <meta name="theme-color" content="#030712">
+  <title>InnerOS — Live Intelligent Operations (ACT III)</title>
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <canvas id="compute-fabric" aria-hidden="true"></canvas>
   <div class="noise" aria-hidden="true"></div>
 
   <main class="shell">
+    <!-- Topbar -->
     <header class="topbar">
       <div class="brand-lockup">
         <div class="brand">Inner<span>OS</span></div>
-        <div class="subtitle">Live Intelligent Operations</div>
+        <div class="subtitle">Live Intelligent Operations · ACT III</div>
       </div>
-      <nav class="topnav" aria-label="Console sections">
-        <button class="nav-item active" data-scroll="operations">Operations</button>
-        <button class="nav-item" data-scroll="reasoning">Reasoning</button>
-        <button class="nav-item" data-scroll="evidence">Evidence</button>
+
+      <nav class="topnav" aria-label="Console navigation">
+        <button class="nav-item active" data-tab="operations" id="tab-btn-operations">
+          <span class="nav-icon">⚡</span> Operations
+        </button>
+        <button class="nav-item" data-tab="reasoning" id="tab-btn-reasoning">
+          <span class="nav-icon">◉</span> Reasoning
+        </button>
+        <button class="nav-item" data-tab="evidence" id="tab-btn-evidence">
+          <span class="nav-icon">🛡</span> Evidence
+        </button>
+        <button class="nav-item" data-tab="all" id="tab-btn-all">
+          <span class="nav-icon">☵</span> All Views
+        </button>
       </nav>
+
       <div class="truth-cluster">
         <div id="global-truth" class="truth-pill verified">
           <span class="dot"></span>
           <span class="truth-text">VERIFIED EVIDENCE READY</span>
         </div>
-        <div class="truth-caption">AI reasoned · human governed · evidence captured</div>
+        <div class="truth-caption" id="truth-caption">AI reasoned · human governed · evidence captured</div>
       </div>
-      <div class="session-cluster" style="display: flex; align-items: center; gap: 8px; margin-left: 12px;">
-        <span class="session-badge" style="font-family: ui-monospace, monospace; font-size: 0.72rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); padding: 3px 8px; border-radius: 999px;">judge_act3</span>
-        <a href="/logout" id="logout-btn" style="font-size: 0.75rem; color: #94a3b8; text-decoration: none; border: 1px solid rgba(148, 163, 184, 0.2); padding: 3px 8px; border-radius: 6px; transition: all 0.2s;">Log Out</a>
+
+      <div class="session-cluster">
+        <span class="session-badge">judge_act3</span>
+        <a href="/logout" id="logout-btn" class="logout-link">Log Out</a>
       </div>
     </header>
 
-    <section class="hero-grid" id="operations">
-      <aside class="incident-rail panel">
-        <div class="eyebrow danger"><span class="pulse-dot"></span> ACTIVE SCENARIO</div>
-        <h1>Network / Camera Outage</h1>
-        <p class="muted">Bellini Tower I · Smart Building Incident</p>
-        <div class="incident-visual" aria-hidden="true">
-          <div class="building-grid">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
+    <!-- Top Action & Judge Proof Banner -->
+    <section class="action-proof-banner">
+      <div class="action-group">
+        <button id="run-live" class="primary-action">
+          <span class="pulse-dot-live"></span>
+          <span class="btn-text">▶ Run Live Demo</span>
+        </button>
+        <button id="replay" class="secondary-action">
+          <span>↺ Replay Verified Run</span>
+        </button>
+        <button id="run-mock" class="ghost-action">
+          <span>Mock / Offline</span>
+        </button>
+        <div class="connection-status">
+          <span class="status-indicator" id="conn-dot"></span>
+          <span id="connection-state">Console ready</span>
+        </div>
+      </div>
+
+      <!-- Compact Judge Proof Panel -->
+      <aside class="judge-proof-card" id="judge-proof-panel" aria-label="Judge Verification Proof">
+        <div class="judge-proof-header">
+          <div class="judge-proof-title">
+            <span class="judge-shield">🛡</span>
+            <strong>JUDGE VERIFICATION PROOF</strong>
           </div>
-          <div class="incident-beacon">!</div>
+          <span class="badge verified" id="judge-truth-badge">LIVE_VERIFIED</span>
         </div>
-        <dl class="telemetry-list">
-          <div><dt>Packet loss</dt><dd id="packet-loss">82.4%</dd></div>
-          <div><dt>Carrier flaps</dt><dd id="carrier-flaps">14 / min</dd></div>
-          <div><dt>Optical RX</dt><dd id="rx-power">-28.4 dBm</dd></div>
-          <div><dt>Subsystems</dt><dd>3 affected</dd></div>
-        </dl>
-        <div class="severity-row">
-          <span>Severity</span>
-          <strong id="severity-badge" class="badge critical">CRITICAL</strong>
-        </div>
-        <div class="rail-actions">
-          <button id="run-live" class="primary-action"><span class="play-icon">▶</span> Run Live Demo</button>
-          <button id="replay" class="secondary-action">Replay Verified Run</button>
-          <button id="run-mock" class="ghost-action">Mock / Offline</button>
+        <div class="judge-proof-grid">
+          <div class="proof-pill">
+            <span class="proof-check" id="proof-check-truth">✓</span>
+            <div>
+              <span class="proof-label">Status</span>
+              <strong id="proof-truth-val">LIVE_VERIFIED</strong>
+            </div>
+          </div>
+          <div class="proof-pill">
+            <span class="proof-check" id="proof-check-model">✓</span>
+            <div>
+              <span class="proof-label">Target Model</span>
+              <strong id="proof-model-val">Gemma-4-31B-IT (16 in Catalog)</strong>
+            </div>
+          </div>
+          <div class="proof-pill">
+            <span class="proof-check" id="proof-check-mcp">✓</span>
+            <div>
+              <span class="proof-label">Evolus MCP</span>
+              <strong id="proof-mcp-val">Evolus2 Data Server v1.0.0</strong>
+            </div>
+          </div>
+          <div class="proof-pill">
+            <span class="proof-check" id="proof-check-evidence">✓</span>
+            <div>
+              <span class="proof-label">Evidence Bundle</span>
+              <strong id="proof-evidence-val">SHA-256 Verified</strong>
+            </div>
+          </div>
+          <div class="proof-pill">
+            <span class="proof-check" id="proof-check-fallback">✓</span>
+            <div>
+              <span class="proof-label">Replay Fallback</span>
+              <strong id="proof-fallback-val">None · Direct Live API</strong>
+            </div>
+          </div>
         </div>
       </aside>
+    </section>
 
-      <section class="command-center">
-        <div class="section-label">AI-Native Incident Resolution Pipeline</div>
+    <!-- ==================== TAB 1: OPERATIONS ==================== -->
+    <section class="tab-pane active" id="pane-operations">
+      <div class="operations-grid">
+        <!-- Incident & Impact Rail -->
+        <aside class="panel incident-rail">
+          <div class="eyebrow danger"><span class="pulse-dot"></span> ACTIVE SCENARIO</div>
+          <h1 id="scenario-title">Core Gateway Optical Flap & Camera Telemetry Drop</h1>
+          <p class="muted">
+            <strong id="scenario-facility">Bellini Building Tower I</strong>
+            <span class="disclaimer-chip">Illustrative Telemetry</span>
+          </p>
 
-        <div class="pipeline" id="pipeline" aria-label="InnerOS incident resolution pipeline">
-          <article class="stage stage-incident active" data-stage="incident">
-            <div class="stage-icon">⚠</div>
-            <div class="stage-kicker">SOURCE</div>
-            <h2>Bellini Incident</h2>
-            <p>Optical flap + camera telemetry loss</p>
-            <div class="stage-state">DETECTED</div>
-          </article>
-          <div class="connector"><span class="data-pulse"></span></div>
-          <article class="stage stage-gemma" data-stage="gemma">
-            <div class="stage-icon brain">◉</div>
-            <div class="stage-kicker">AMD TOKEN FACTORY</div>
-            <h2>Gemma on AMD</h2>
-            <p>Gemma-4-31B-IT · ROCm</p>
-            <div class="stage-state">READY</div>
-          </article>
-          <div class="connector"><span class="data-pulse"></span></div>
-          <article class="stage stage-evolus" data-stage="evolus">
-            <div class="stage-icon">⌘</div>
-            <div class="stage-kicker">BUSINESS AGENT</div>
-            <h2>Evolus</h2>
-            <p>Workflow + Knowledge Library</p>
-            <div class="stage-state">READY</div>
-          </article>
-          <div class="connector"><span class="data-pulse"></span></div>
-          <article class="stage stage-evidence" data-stage="evidence">
-            <div class="stage-icon shield">✓</div>
-            <div class="stage-kicker">INNEROS</div>
-            <h2>Evidence</h2>
-            <p>Verify · seal · replay</p>
-            <div class="stage-state">READY</div>
-          </article>
+          <div class="incident-visual" aria-hidden="true">
+            <div class="building-grid">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="incident-beacon">!</div>
+            <span class="illustrative-label">Bellini Tower I (Illustrative Architectural Model)</span>
+          </div>
+
+          <div class="impact-section">
+            <div class="impact-title">Incident Source & Impact</div>
+            <div class="impact-desc" id="incident-impact-desc">
+              Critical optical link degradation on core gateway SFP+ trunk. High risk of surveillance telemetry blindness and physical access control desynchronization.
+            </div>
+          </div>
+
+          <dl class="telemetry-list">
+            <div>
+              <dt>Packet loss</dt>
+              <dd id="packet-loss">82.4%</dd>
+            </div>
+            <div>
+              <dt>Carrier flaps</dt>
+              <dd id="carrier-flaps">14 / min</dd>
+            </div>
+            <div>
+              <dt>Optical RX Power</dt>
+              <dd id="rx-power" class="text-danger">-28.4 dBm</dd>
+            </div>
+            <div>
+              <dt>Subsystems Affected</dt>
+              <dd id="affected-subsystems-count">3 subsystems</dd>
+            </div>
+            <div>
+              <dt>Affected Subsystems</dt>
+              <dd id="affected-subsystems-list" class="subsystem-tags">
+                <span class="chip">surveillance_cameras</span>
+                <span class="chip">access_control</span>
+                <span class="chip">building_telemetry</span>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="severity-row">
+            <span>Incident Severity</span>
+            <strong id="severity-badge" class="badge critical">CRITICAL</strong>
+          </div>
+        </aside>
+
+        <!-- Command Center & Pipeline -->
+        <div class="operations-main">
+          <div class="section-label">AI-Native Incident Resolution Pipeline (Per-Stage Live Status)</div>
+
+          <!-- Multi-Stage Pipeline -->
+          <div class="pipeline" id="pipeline" aria-label="InnerOS incident resolution pipeline">
+            <!-- Stage 1 -->
+            <article class="stage stage-incident active" data-stage="incident">
+              <div class="stage-icon">⚠</div>
+              <div class="stage-kicker">STAGE 1 · SOURCE</div>
+              <h2>Incident Ingest</h2>
+              <p>Optical flap & telemetry drop</p>
+              <div class="stage-meta-row">
+                <span class="stage-time" id="stage1-time">T+00.00s</span>
+                <span class="stage-spec">bellini-network-guardian</span>
+              </div>
+              <div class="stage-state">DETECTED</div>
+            </article>
+
+            <div class="connector"><span class="data-pulse"></span></div>
+
+            <!-- Stage 2 -->
+            <article class="stage stage-gemma" data-stage="gemma">
+              <div class="stage-icon brain">◉</div>
+              <div class="stage-kicker">STAGE 2 · AMD TOKEN FACTORY</div>
+              <h2>Gemma Reasoning</h2>
+              <p>Gemma-4-31B-IT · ROCm</p>
+              <div class="stage-meta-row">
+                <span class="stage-time" id="stage2-time">—</span>
+                <span class="stage-spec" id="stage2-spec">ROCm Token Factory</span>
+              </div>
+              <div class="stage-state">READY</div>
+            </article>
+
+            <div class="connector"><span class="data-pulse"></span></div>
+
+            <!-- Stage 3 -->
+            <article class="stage stage-evolus" data-stage="evolus">
+              <div class="stage-icon">⌘</div>
+              <div class="stage-kicker">STAGE 3 · BUSINESS AGENT</div>
+              <h2>Evolus Agent</h2>
+              <p>Workflow + Knowledge Library</p>
+              <div class="stage-meta-row">
+                <span class="stage-time" id="stage3-time">—</span>
+                <span class="stage-spec" id="stage3-spec">Evolus MCP JSON-RPC</span>
+              </div>
+              <div class="stage-state">READY</div>
+            </article>
+
+            <div class="connector"><span class="data-pulse"></span></div>
+
+            <!-- Stage 4 -->
+            <article class="stage stage-evidence" data-stage="evidence">
+              <div class="stage-icon shield">✓</div>
+              <div class="stage-kicker">STAGE 4 · INNEROS</div>
+              <h2>Governed Evidence</h2>
+              <p>Verify · Seal · Replay</p>
+              <div class="stage-meta-row">
+                <span class="stage-time" id="stage4-time">—</span>
+                <span class="stage-spec">SHA-256 Bundle</span>
+              </div>
+              <div class="stage-state">READY</div>
+            </article>
+          </div>
+
+          <!-- Operations Metrics Row -->
+          <div class="metrics-strip">
+            <div class="metric-card">
+              <span class="metric-label">Execution Time</span>
+              <strong class="metric-val" id="total-exec-time">—</strong>
+              <small class="metric-sub" id="exec-time-breakdown">Inference: — | MCP: —</small>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Live Model</span>
+              <strong class="metric-val" id="ops-model-name">Gemma-4-31B-IT</strong>
+              <small class="metric-sub">AMD Developer Cloud (ROCm)</small>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Human Time Returned</span>
+              <strong class="metric-val text-green" id="ops-time-returned">43.0 min</strong>
+              <small class="metric-sub" id="ops-automation-rate">95.56% automation rate</small>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Remediation Status</span>
+              <strong class="metric-val" id="ops-remediation-status">GOVERNED PENDING</strong>
+              <small class="metric-sub" id="ops-wo-id">WO-EVOLUS-INC-BELLINI-20261014-01</small>
+            </div>
+          </div>
+
+          <!-- Lower Dual Cards in Operations -->
+          <div class="lower-grid">
+            <article class="panel plan-panel">
+              <div class="panel-head">
+                <div>
+                  <div class="eyebrow blue">AI-DIRECTED INCIDENT PLAN</div>
+                  <h3>Gemma Recommended Response</h3>
+                </div>
+                <div class="hash-chip-wrap">
+                  <span id="plan-hash" class="mono-chip">NO RUN</span>
+                  <button class="btn-copy-chip" id="copy-plan-hash" title="Copy Plan SHA-256">Copy</button>
+                </div>
+              </div>
+              <ol id="incident-actions" class="timeline">
+                <li><span>1</span><div><strong>Awaiting incident analysis</strong><p>Gemma will produce a structured IncidentPlan.</p></div></li>
+              </ol>
+            </article>
+
+            <article class="panel workorder-panel">
+              <div class="panel-head">
+                <div>
+                  <div class="eyebrow cyan">EVOLUS WORK ORDER</div>
+                  <h3 id="workorder-id">Not created</h3>
+                </div>
+                <div class="wo-head-right">
+                  <span class="badge neutral" id="workorder-status">READY</span>
+                  <button class="btn-copy-chip" id="copy-wo-id" title="Copy Work Order ID">Copy</button>
+                </div>
+              </div>
+              <div class="block-badges">
+                <span class="badge-block">✓ Workflow Block</span>
+                <span class="badge-block">✓ Knowledge Library Block</span>
+              </div>
+              <div id="workorder-steps" class="workflow-steps">
+                <div class="workflow-step"><i></i><span>Waiting for governed remediation workflow</span></div>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <div class="reasoning panel" id="reasoning">
+        <!-- Evidence Quick Rail -->
+        <aside class="evidence-rail" id="evidence-quick-rail">
+          <article class="panel evidence-panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow green">EVIDENCE RECEIPT</div>
+                <h3>Cryptographic Proof</h3>
+              </div>
+              <span id="evidence-state" class="badge verified">READY</span>
+            </div>
+
+            <div class="evidence-orbit" aria-hidden="true">
+              <div class="orbit orbit-a"></div>
+              <div class="orbit orbit-b"></div>
+              <div class="evidence-core">SHA</div>
+            </div>
+
+            <div class="hash-box">
+              <span>Bundle SHA-256</span>
+              <code id="bundle-hash">33fa50b4…97d5</code>
+              <button id="copy-hash" title="Copy full evidence hash">Copy</button>
+            </div>
+
+            <dl class="evidence-list">
+              <div><dt>Provider</dt><dd id="provider-label">AMD + Evolus</dd></div>
+              <div><dt>Truth</dt><dd id="truth-label">Stored verified run</dd></div>
+              <div><dt>Timestamp</dt><dd id="timestamp-label">2026-10-18 03:10 UTC</dd></div>
+              <div><dt>Application</dt><dd id="application-label">InnerOS</dd></div>
+              <div><dt>Verification</dt><dd id="verification-status-label" class="text-green">PASS (Deterministic)</dd></div>
+            </dl>
+          </article>
+
+          <article class="panel time-panel">
+            <div class="eyebrow green">HUMAN TIME RETURNED</div>
+            <div class="time-visual">
+              <div class="time-ring"><div><strong id="time-returned">43</strong><span>minutes</span></div></div>
+              <div class="time-copy">
+                <strong id="automation-rate">95.56%</strong>
+                <span>automation rate</span>
+                <p>From incident detection to governed work order and sealed evidence receipt.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="compute-spine">
+            <div class="compute-title">AMD / ROCm Compute Fabric</div>
+            <div class="compute-model" id="compute-model-label">Gemma-4-31B-IT</div>
+            <div class="compute-bars" aria-hidden="true">
+              <span style="--h:68%"></span><span style="--h:38%"></span><span style="--h:82%"></span>
+              <span style="--h:52%"></span><span style="--h:91%"></span><span style="--h:61%"></span>
+              <span style="--h:74%"></span><span style="--h:44%"></span><span style="--h:87%"></span>
+            </div>
+            <div class="compute-footer">OpenAI-compatible · auditable · local-first governed</div>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: REASONING ==================== -->
+    <section class="tab-pane" id="pane-reasoning">
+      <div class="reasoning-full-grid">
+        <!-- Row 1: Context & Observed Facts + Operational Diagnosis -->
+        <article class="panel reasoning-context-card">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow blue">INCIDENT CONTEXT & INPUTS</div>
+              <h3>Gemma Model Grounding</h3>
+            </div>
+            <span class="mono-chip">INC-BELLINI-20261014-01</span>
+          </div>
+
+          <div class="facts-grid">
+            <div class="fact-box">
+              <div class="fact-label">Observed Fact 1: Optical Attenuation</div>
+              <div class="fact-val text-danger">Rx power: -28.4 dBm (Threshold: -18.0 dBm)</div>
+              <p class="fact-desc">Severe optical attenuation on Core Gateway SFP+ interface eth0/opt1 exceeding receiver sensitivity limits.</p>
+            </div>
+            <div class="fact-box">
+              <div class="fact-label">Observed Fact 2: Carrier Flapping</div>
+              <div class="fact-val text-amber">14 link resets / minute</div>
+              <p class="fact-desc">Downlink physical link constantly renegotiating sync, disrupting continuous streaming protocols.</p>
+            </div>
+            <div class="fact-box">
+              <div class="fact-label">Observed Fact 3: Packet Loss on Trunk</div>
+              <div class="fact-val text-danger">82.4% packet loss</div>
+              <p class="fact-desc">Frame drops causing surveillance camera drops and building telemetry sensor timeout.</p>
+            </div>
+            <div class="fact-box">
+              <div class="fact-label">Observed Fact 4: Bounded Governance</div>
+              <div class="fact-val text-green">BELLINI-POL-441 & COMPLIANCE-SLA-99</div>
+              <p class="fact-desc">Remediation actions strictly bounded; physical fiber clean requires human-in-the-loop sign-off.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Operational Diagnosis Card -->
+        <article class="panel reasoning-diagnosis-card" id="reasoning">
           <div class="panel-head">
             <div>
               <div class="eyebrow blue">AI REASONING · GEMMA ON AMD</div>
-              <h3>Operational diagnosis</h3>
+              <h3>Operational Diagnosis</h3>
             </div>
             <span id="reasoning-truth" class="badge neutral">READY</span>
           </div>
+
           <div id="reasoning-text" class="terminal-copy">
             Select <strong>Run Live Demo</strong> for a fresh execution, or replay the verified ACT III evidence receipt.
           </div>
+
+          <div class="diagnosis-facts-row">
+            <div>
+              <span class="df-label">Probable Root Cause</span>
+              <strong class="df-val" id="probable-root-cause">Optical SFP+ fiber connector contamination or transceiver degradation</strong>
+            </div>
+            <div>
+              <span class="df-label">Severity Level</span>
+              <strong class="df-val text-danger" id="reasoning-severity">CRITICAL</strong>
+            </div>
+            <div>
+              <span class="df-label">Incident Category</span>
+              <strong class="df-val" id="reasoning-category">network / optical infrastructure</strong>
+            </div>
+          </div>
+
           <div class="reasoning-meta">
             <div><span>Model</span><strong id="model-name">Gemma-4-31B-IT</strong></div>
-            <div><span>Runtime</span><strong>AMD ROCm</strong></div>
-            <div><span>Latency</span><strong id="gemma-latency">—</strong></div>
-            <div><span>Tokens</span><strong id="token-count">—</strong></div>
+            <div><span>Runtime</span><strong id="reasoning-runtime">AMD Developer Cloud (ROCm)</strong></div>
+            <div><span>Inference Latency</span><strong id="gemma-latency">—</strong></div>
+            <div><span>Tokens Generated</span><strong id="token-count">—</strong></div>
           </div>
-        </div>
+        </article>
 
-        <div class="lower-grid">
-          <article class="panel plan-panel">
-            <div class="panel-head">
-              <div>
-                <div class="eyebrow">INCIDENT PLAN</div>
-                <h3>AI-directed response</h3>
-              </div>
-              <span id="plan-hash" class="mono-chip">NO RUN</span>
-            </div>
-            <ol id="incident-actions" class="timeline">
-              <li><span>1</span><div><strong>Awaiting incident analysis</strong><p>Gemma will produce a structured IncidentPlan.</p></div></li>
-            </ol>
-          </article>
-
-          <article class="panel workorder-panel">
-            <div class="panel-head">
-              <div>
-                <div class="eyebrow cyan">EVOLUS WORK ORDER</div>
-                <h3 id="workorder-id">Not created</h3>
-              </div>
-              <span class="badge neutral" id="workorder-status">READY</span>
-            </div>
-            <div class="block-badges"><span>Workflow</span><span>Knowledge Library</span></div>
-            <div id="workorder-steps" class="workflow-steps">
-              <div class="workflow-step"><i></i><span>Waiting for governed remediation workflow</span></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <aside class="evidence-rail" id="evidence">
-        <article class="panel evidence-panel">
+        <!-- Row 2: AI-Directed Recommended Actions & Priorities -->
+        <article class="panel actions-full-card">
           <div class="panel-head">
             <div>
-              <div class="eyebrow green">EVIDENCE RECEIPT</div>
-              <h3>Immutable execution proof</h3>
+              <div class="eyebrow blue">RECOMMENDED ACTIONS & PRIORITIES</div>
+              <h3>AI-Directed Remediation Matrix</h3>
             </div>
-            <span id="evidence-state" class="badge verified">READY</span>
+            <span class="mono-chip" id="action-count-badge">3 Actions Ordered</span>
           </div>
 
-          <div class="evidence-orbit" aria-hidden="true">
-            <div class="orbit orbit-a"></div>
-            <div class="orbit orbit-b"></div>
-            <div class="evidence-core">SHA</div>
-          </div>
+          <div class="action-cards-grid" id="action-cards-container">
+            <!-- Dynamic action cards populated by app.js -->
+            <div class="action-card priority-immediate">
+              <div class="ac-top">
+                <span class="ac-id">ACT-01</span>
+                <span class="ac-priority immediate">IMMEDIATE</span>
+              </div>
+              <div class="ac-title">Optical Power Validation & Connector Cleaning</div>
+              <p class="ac-desc">Perform optical power validation and clean fiber connectors at the core gateway interface.</p>
+              <div class="ac-meta">
+                <span>Target: <code>core_gateway_optical_link</code></span>
+                <span>Reversible: <strong class="text-green">YES</strong></span>
+              </div>
+            </div>
 
-          <div class="hash-box">
-            <span>Bundle SHA-256</span>
-            <code id="bundle-hash">6ee36d69…3b3f845</code>
-            <button id="copy-hash" title="Copy full evidence hash">Copy</button>
-          </div>
+            <div class="action-card priority-high">
+              <div class="ac-top">
+                <span class="ac-id">ACT-02</span>
+                <span class="ac-priority high">HIGH</span>
+              </div>
+              <div class="ac-title">Failover to Redundant Secondary Link</div>
+              <p class="ac-desc">Failover to redundant secondary network path to restore surveillance and access control.</p>
+              <div class="ac-meta">
+                <span>Target: <code>network_routing_table</code></span>
+                <span>Reversible: <strong class="text-green">YES</strong></span>
+              </div>
+            </div>
 
-          <dl class="evidence-list">
-            <div><dt>Provider</dt><dd id="provider-label">AMD + Evolus</dd></div>
-            <div><dt>Truth</dt><dd id="truth-label">Stored verified run</dd></div>
-            <div><dt>Timestamp</dt><dd id="timestamp-label">2026-10-15 02:40 UTC</dd></div>
-            <div><dt>Application</dt><dd id="application-label">InnerOS</dd></div>
-          </dl>
-        </article>
-
-        <article class="panel time-panel">
-          <div class="eyebrow green">HUMAN TIME RETURNED</div>
-          <div class="time-visual">
-            <div class="time-ring"><div><strong id="time-returned">43</strong><span>minutes</span></div></div>
-            <div class="time-copy">
-              <strong id="automation-rate">95.56%</strong>
-              <span>automation rate</span>
-              <p>From incident detection to governed work order and evidence receipt.</p>
+            <div class="action-card priority-medium">
+              <div class="ac-top">
+                <span class="ac-id">ACT-03</span>
+                <span class="ac-priority medium">MEDIUM</span>
+              </div>
+              <div class="ac-title">Hardware SFP+ Transceiver Replacement</div>
+              <p class="ac-desc">Replace SFP+ transceiver module if signal levels do not stabilize after cleaning.</p>
+              <div class="ac-meta">
+                <span>Target: <code>core_gateway_hardware</code></span>
+                <span>Reversible: <strong class="text-green">YES</strong></span>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="compute-spine">
-          <div class="compute-title">AMD / ROCm Compute Fabric</div>
-          <div class="compute-model">Gemma-4-31B-IT</div>
-          <div class="compute-bars" aria-hidden="true">
-            <span style="--h:68%"></span><span style="--h:38%"></span><span style="--h:82%"></span>
-            <span style="--h:52%"></span><span style="--h:91%"></span><span style="--h:61%"></span>
-            <span style="--h:74%"></span><span style="--h:44%"></span><span style="--h:87%"></span>
+        <!-- Row 3: InnerOS Governance & Handoff to Evolus -->
+        <article class="panel governance-handoff-card">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow cyan">INNEROS GOVERNANCE & HANDOFF</div>
+              <h3>Safe Bounded Delegation to Evolus MCP</h3>
+            </div>
+            <span class="badge verified">POLICY COMPLIANT</span>
           </div>
-          <div class="compute-footer">OpenAI-compatible · auditable · local-first governed</div>
+
+          <div class="handoff-grid">
+            <div class="handoff-cell">
+              <span class="h-label">Delegation Lane</span>
+              <strong class="h-val text-amber" id="delegation-lane-val">manual_approval</strong>
+              <p class="h-desc">Irreversible physical maintenance gated by human supervisor; failover automated.</p>
+            </div>
+            <div class="handoff-cell">
+              <span class="h-label">Incident Plan SHA-256</span>
+              <code class="h-val-code" id="handoff-plan-hash">cc3b70cb…60cb</code>
+              <button class="btn-copy-chip" id="copy-handoff-hash">Copy</button>
+            </div>
+            <div class="handoff-cell">
+              <span class="h-label">Evolus MCP Target</span>
+              <strong class="h-val">Evolus2 Data Server v1.0.0</strong>
+              <p class="h-desc">Standard MCP JSON-RPC protocol over stdio for governed work order creation.</p>
+            </div>
+          </div>
         </article>
-      </aside>
+      </div>
     </section>
 
-    <section class="judge-strip">
-      <div><span>Google DeepMind Gemma</span><strong>LIVE VERIFIED</strong><small>Gemma-4-31B-IT on AMD Token Factory</small></div>
-      <div><span>Evolus Business Agents</span><strong>LIVE VERIFIED</strong><small>Workflow + Knowledge Library over MCP</small></div>
-      <div><span>InnerOS Evidence</span><strong>REPLAYABLE</strong><small>SHA-256 execution bundle + truth labels</small></div>
+    <!-- ==================== TAB 3: EVIDENCE ==================== -->
+    <section class="tab-pane" id="pane-evidence">
+      <div class="evidence-full-grid">
+        <!-- Chronological Timeline -->
+        <article class="panel evidence-timeline-card">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow green">CHRONOLOGICAL EVIDENCE TIMELINE</div>
+              <h3>End-to-End Audit Trail</h3>
+            </div>
+            <span class="mono-chip" id="pipeline-id-chip">dual-act3-f4639bad9171</span>
+          </div>
+
+          <div class="timeline-v" id="evidence-timeline-v">
+            <div class="tl-item">
+              <div class="tl-badge">01</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>Incident Detection & Ingestion</strong>
+                  <span class="tl-offset">T+00:00.000</span>
+                </div>
+                <p>Sensor telemetry ingested: 82.4% packet loss, 14 flaps/min, -28.4 dBm Rx power on Bellini Tower I gateway.</p>
+                <div class="tl-meta">Source: <code>bellini-network-guardian</code> | Subsystems: 3 affected</div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-badge">02</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>Gemma Live Request Dispatched</strong>
+                  <span class="tl-offset" id="tl-offset-gemma-start">T+00:00.450</span>
+                </div>
+                <p>Incident context dispatched to AMD Developer Cloud Token Factory API (Gemma-4-31B-IT on ROCm).</p>
+                <div class="tl-meta">Host: <code>developer.amd.com.cn</code> | Model: <code>Gemma-4-31B-IT</code></div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-badge">03</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>Gemma Plan Generated & Sealed</strong>
+                  <span class="tl-offset" id="tl-offset-gemma-end">T+00:16.724</span>
+                </div>
+                <p>Structured IncidentPlan produced (3 recommended actions, root cause diagnosis, 619 tokens generated).</p>
+                <div class="tl-meta">Plan Hash: <code id="tl-plan-hash">cc3b70cb…60cb</code> | Latency: <span id="tl-gemma-latency">16,274 ms</span></div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-badge">04</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>InnerOS Governance Boundary Check</strong>
+                  <span class="tl-offset" id="tl-offset-gov">T+00:17.100</span>
+                </div>
+                <p>Verification against safety policies BELLINI-POL-441 and COMPLIANCE-SLA-99. Bounded lane confirmed.</p>
+                <div class="tl-meta">Lane: <code>manual_approval</code> | Schema: <code>inneros.act3.plan.v1</code></div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-badge">05</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>Evolus MCP Work Order Created</strong>
+                  <span class="tl-offset" id="tl-offset-evolus">T+00:17.800</span>
+                </div>
+                <p>Evolus2 Data Server MCP generates governed work order with workflow steps and grounded SOPs.</p>
+                <div class="tl-meta">Work Order ID: <code id="tl-wo-id">WO-EVOLUS-INC-BELLINI-20261014-01</code> | Blocks: <code>workflow</code>, <code>knowledge_library</code></div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-badge">06</div>
+              <div class="tl-content">
+                <div class="tl-header">
+                  <strong>Immutable Evidence Bundle Sealed</strong>
+                  <span class="tl-offset" id="tl-offset-seal">T+00:18.200</span>
+                </div>
+                <p>Execution hashes aggregated and sealed in tamper-evident SHA-256 evidence manifest.</p>
+                <div class="tl-meta">Bundle SHA-256: <code id="tl-bundle-hash">33fa50b4…97d5</code> | Status: <strong class="text-green">VERIFIED</strong></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cryptographic Identifiers & Copy Buttons -->
+        <div class="evidence-side-col">
+          <article class="panel cryptographic-hashes-card">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow green">CRYPTOGRAPHIC IDENTIFIERS</div>
+                <h3>Verifiable Artifacts</h3>
+              </div>
+              <span class="badge verified">SEALED</span>
+            </div>
+
+            <div class="crypto-id-list">
+              <div class="crypto-id-item">
+                <div class="cid-header">
+                  <span>Evidence Bundle SHA-256</span>
+                  <button class="btn-copy-chip" id="copy-bundle-hash-full">Copy</button>
+                </div>
+                <code class="cid-val" id="evidence-bundle-hash">33fa50b42624dfc6ef9c2bfb702f85045da6e664550eeecb2827a36b2a1c97d5</code>
+              </div>
+
+              <div class="crypto-id-item">
+                <div class="cid-header">
+                  <span>Work Order ID</span>
+                  <button class="btn-copy-chip" id="copy-wo-id-full">Copy</button>
+                </div>
+                <code class="cid-val" id="evidence-wo-id">WO-EVOLUS-INC-BELLINI-20261014-01</code>
+              </div>
+
+              <div class="crypto-id-item">
+                <div class="cid-header">
+                  <span>Application ID</span>
+                  <button class="btn-copy-chip" id="copy-app-id-full">Copy</button>
+                </div>
+                <code class="cid-val" id="evidence-app-id">80dfecd4-8474-4aad-9565-5b7a2be10ea4</code>
+              </div>
+
+              <div class="crypto-id-item">
+                <div class="cid-header">
+                  <span>Incident Plan SHA-256</span>
+                  <button class="btn-copy-chip" id="copy-plan-hash-full">Copy</button>
+                </div>
+                <code class="cid-val" id="evidence-plan-hash">cc3b70cb8ed6c6fa225828b38f423dfbe3d7fa8ca71d0241016c1416866060cb</code>
+              </div>
+
+              <div class="crypto-id-item">
+                <div class="cid-header">
+                  <span>Work Order SHA-256</span>
+                  <button class="btn-copy-chip" id="copy-wo-hash-full">Copy</button>
+                </div>
+                <code class="cid-val" id="evidence-wo-hash">fb2b0ddfdaab6c7af0e26f6bfc9bbd83863ec3a9eac4cdd3895aefd297d30592</code>
+              </div>
+            </div>
+
+            <div class="provider-specs-grid">
+              <div><span class="ps-lbl">Provider</span><strong class="ps-val">AMD + Evolus</strong></div>
+              <div><span class="ps-lbl">Model</span><strong class="ps-val">Gemma-4-31B-IT</strong></div>
+              <div><span class="ps-lbl">Runtime</span><strong class="ps-val">ROCm Token Factory</strong></div>
+              <div><span class="ps-lbl">Schema</span><strong class="ps-val">inneros.act3.evidence.v1</strong></div>
+            </div>
+          </article>
+
+          <!-- Evolus 2 Building Blocks Breakdown -->
+          <article class="panel evolus-blocks-card">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow cyan">EVOLUS BUILDING BLOCKS</div>
+                <h3>Workflow + Knowledge Library</h3>
+              </div>
+              <span class="badge verified">MCP LIVE</span>
+            </div>
+
+            <div class="evolus-block-section">
+              <div class="eb-title">Block 1: Governed Remediation Workflow (3 Steps)</div>
+              <div class="eb-steps-list" id="evolus-workflow-list">
+                <div class="eb-step-item">
+                  <span class="eb-num">1</span>
+                  <div class="eb-step-body">
+                    <strong>Verify redundant link connectivity</strong>
+                    <small>Role: autonomous_network_agent | Gate: <code>ping_success_count >= 10</code></small>
+                  </div>
+                </div>
+                <div class="eb-step-item">
+                  <span class="eb-num">2</span>
+                  <div class="eb-step-body">
+                    <strong>Open ISP Tier-2 Escalation Ticket</strong>
+                    <small>Role: facility_ops_dispatcher | Gate: <code>ticket_id_generated</code></small>
+                  </div>
+                </div>
+                <div class="eb-step-item">
+                  <span class="eb-num">3</span>
+                  <div class="eb-step-body">
+                    <strong>Facility Manager Notification</strong>
+                    <small>Role: inneros_supervisor | Gate: <code>owner_read_receipt</code></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="evolus-block-section">
+              <div class="eb-title">Block 2: Knowledge Library SOP Grounding</div>
+              <div class="sop-list" id="evolus-sop-list">
+                <div class="sop-card">
+                  <div class="sop-top">
+                    <strong>SOP-NET-082</strong>
+                    <span class="sop-score">Relevance: 94%</span>
+                  </div>
+                  <div class="sop-name">Carrier Link Flap & Automated Failover Procedure</div>
+                  <p class="sop-excerpt">"When carrier loss exceeds 30s, redirect trunk VLAN to backup interface and quarantine flapping link."</p>
+                  <small class="sop-policy">Policy: <code>BELLINI-POL-441</code></small>
+                </div>
+                <div class="sop-card">
+                  <div class="sop-top">
+                    <strong>SOP-FAC-119</strong>
+                    <span class="sop-score">Relevance: 88%</span>
+                  </div>
+                  <div class="sop-name">Autonomous Remediation Approval & Vendor Escalation</div>
+                  <p class="sop-excerpt">"All automated gateway reboots must be followed by a formal ticket submission to ISP NOC with replay log."</p>
+                  <small class="sop-policy">Policy: <code>COMPLIANCE-SLA-99</code></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="mcp-server-meta">
+              <span>MCP Server: <strong>Evolus2 Data Server v1.0.0</strong></span>
+              <span>Transport: <strong>JSON-RPC over stdio</strong></span>
+              <span>Verification: <strong class="text-green">PASS (Deterministic)</strong></span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
+    <!-- Footer -->
     <footer>
       <span>InnerOS Labs · AMD Developer Hackathon ACT III</span>
-      <span id="connection-state">Console ready</span>
+      <span id="footer-connection">Console ready · Authenticated segment: judge_act3</span>
     </footer>
   </main>
+
   <script src="/assets/app.js"></script>
 </body>
 </html>
