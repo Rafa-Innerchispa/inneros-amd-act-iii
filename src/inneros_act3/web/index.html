@@ -40,7 +40,9 @@
         <div class="eyebrow danger"><span class="pulse-dot"></span> ACTIVE SCENARIO</div>
         <h1>Network / Camera Outage</h1>
         <p class="muted">Bellini Tower I · Smart Building Incident</p>
+        <p class="incident-summary">Optical uplink instability interrupted camera telemetry and building-network visibility. InnerOS correlates the incident, reasons over remediation, orchestrates a governed work order, and seals the resulting evidence.</p>
         <div class="incident-visual" aria-hidden="true">
+          <div class="building-label"><strong>BELLINI</strong><span>TOWER I</span></div>
           <div class="building-grid">
             <span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
@@ -179,6 +181,23 @@
           </dl>
         </article>
 
+        <article class="panel recovery-panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow cyan">RECOVERY PROGRESS</div>
+              <h3>Governed remediation</h3>
+            </div>
+            <strong id="recovery-percent" class="recovery-percent">0%</strong>
+          </div>
+          <div class="recovery-track"><span id="recovery-bar"></span></div>
+          <div class="recovery-steps">
+            <div><i></i><span>Detect</span><small>Incident</small></div>
+            <div><i></i><span>Analyze</span><small>Gemma</small></div>
+            <div><i></i><span>Orchestrate</span><small>Evolus</small></div>
+            <div><i></i><span>Verify</span><small>Evidence</small></div>
+          </div>
+        </article>
+
         <article class="panel time-panel">
           <div class="eyebrow green">HUMAN TIME RETURNED</div>
           <div class="time-visual">
@@ -202,6 +221,25 @@
           <div class="compute-footer">OpenAI-compatible · auditable · local-first governed</div>
         </article>
       </aside>
+    </section>
+
+    <section class="topology-panel panel" aria-label="Bellini recovery topology">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow blue">TOPOLOGY SNAPSHOT</div>
+          <h3>Bellini incident path</h3>
+        </div>
+        <span id="topology-state" class="badge neutral">AWAITING RUN</span>
+      </div>
+      <div class="topology-flow">
+        <div class="topology-node danger-node"><strong>Bellini Tower I</strong><span>Camera telemetry</span></div>
+        <div class="topology-link degraded"><span>Optical uplink</span></div>
+        <div class="topology-node"><strong>Core Network</strong><span>Failover decision</span></div>
+        <div class="topology-link healthy"><span>Governed route</span></div>
+        <div class="topology-node amd-node"><strong>AMD + Gemma</strong><span>Operational reasoning</span></div>
+        <div class="topology-link healthy"><span>Evolus MCP</span></div>
+        <div class="topology-node verified-node"><strong>InnerOS Evidence</strong><span>Verify · seal · replay</span></div>
+      </div>
     </section>
 
     <section class="judge-strip">
