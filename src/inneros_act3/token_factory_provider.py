@@ -249,7 +249,7 @@ def generate_incident_plan(
             {"role": "user", "content": prompt},
         ],
         "temperature": 0.1,
-        "max_tokens": 300,
+        "max_tokens": 600,
     }
 
     req_body = json.dumps(payload).encode("utf-8")
@@ -266,7 +266,7 @@ def generate_incident_plan(
     )
 
     t0 = time.perf_counter()
-    with urllib.request.urlopen(req, timeout=45) as resp:
+    with urllib.request.urlopen(req, timeout=90) as resp:
         elapsed_ms = (time.perf_counter() - t0) * 1000.0
         raw_text = resp.read().decode("utf-8")
         parsed = json.loads(raw_text)
