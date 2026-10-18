@@ -140,7 +140,13 @@ function renderWorkflow(steps) {
 
 function renderPayload(payload) {
   const truth = payload.truth || "BLOCKED";
-  setTruth(truth, truth === "LIVE_VERIFIED_REPLAY" ? "Verified ACT III receipt replayed" : "Execution: " + truth);
+  const liveFallback = payload.mode === "live_fallback";
+  const detail = liveFallback
+    ? "Live provider unavailable · verified ACT III evidence replayed"
+    : truth === "LIVE_VERIFIED_REPLAY"
+      ? "Verified ACT III receipt replayed"
+      : "Execution: " + truth;
+  setTruth(truth, detail);
 
   if (truth === "BLOCKED" || truth === "FAILED") {
     ["gemma", "evolus", "evidence"].forEach((name) => markStage(name, "blocked", "BLOCKED"));
@@ -157,9 +163,9 @@ function renderPayload(payload) {
   const time = p.human_time_returned || {};
 
   markStage("incident", "verified", "DETECTED");
-  markStage("gemma", "verified", truth === "MOCK" ? "MOCK" : "VERIFIED");
-  markStage("evolus", "verified", truth === "MOCK" ? "MOCK" : "VERIFIED");
-  markStage("evidence", "verified", evidence.verified === false ? "UNVERIFIED" : "SEALED");
+  markStage("gemma", "verified", truth === "MOCK" ? "MOCK" : liveFallback ? "VERIFIED REPLAY" : "ANALYZED");
+  markStage("evolus", "verified", truth === "MOCK" ? "MOCK" : liveFallback ? "VERIFIED REPLAY" : "ORCHESTRATED");
+  markStage("evidence", "verified", evidence.verified === false ? "UNVERIFIED" : "VERIFIED");
 
   setBadge($("#reasoning-truth"), truth);
   setBadge($("#evidence-state"), truth);
@@ -182,8 +188,8 @@ function renderPayload(payload) {
     $("#bundle-hash").textContent = fmtHash(hash);
   }
 
-  $("#provider-label").textContent = truth === "MOCK" ? "Offline deterministic" : "AMD Token Factory + Evolus MCP";
-  $("#truth-label").textContent = truth.replaceAll("_", " ");
+  $("#provider-label").textContent = truth === "MOCK" ? "Offline deterministic" : "AMD + Evolus";
+  $("#truth-label").textContent = liveFallback ? "Verified replay after live check" : truth.replaceAll("_", " ");
   $("#timestamp-label").textContent = p.created_at || payload.verified_at || "Verified receipt";
   $("#application-label").textContent = evolus.application_name || "InnerOS";
 
@@ -192,7 +198,22 @@ function renderPayload(payload) {
   const rate = time.automation_rate !== undefined ? time.automation_rate : 0.9556;
   $("#automation-rate").textContent = (Number(rate) * 100).toFixed(2) + "%";
 
-  typeText(gemma.diagnosis || "Verified execution replay loaded. Run live to obtain a fresh Gemma operational diagnosis.");
+  const diagnosis = gemma.diagnosis || "Verified execution replay loaded.";
+  const fallbackNote = liveFallback && payload.live_attempt
+    ? " Live check: " + (payload.live_attempt.message || payload.live_attempt.error || "provider unavailable") + ". Showing the last cryptographically verified run instead."
+    : "";
+  typeText(diagnosis + fallbackNote);
+
+  const percent = truth === "BLOCKED" || truth === "FAILED" ? 0 : 100;
+  const recoveryPercent = $("#recovery-percent");
+  const recoveryBar = $("#recovery-bar");
+  const topologyState = $("#topology-state");
+  if (recoveryPercent) recoveryPercent.textContent = percent + "%";
+  if (recoveryBar) recoveryBar.style.width = percent + "%";
+  if (topologyState) {
+    topologyState.className = "badge " + (percent === 100 ? "verified" : "neutral");
+    topologyState.textContent = percent === 100 ? (liveFallback ? "VERIFIED REPLAY" : "RECOVERED") : "AWAITING RUN";
+  }
 }
 
 async function fetchJson(url, options) {
