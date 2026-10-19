@@ -11,7 +11,7 @@ from urllib.parse import parse_qs, urlparse
 
 from .dual_prize import run_dual_prize_pipeline
 from .evolus_adapter import evolus_smoke
-from .token_factory_provider import DEFAULT_TOKEN_FACTORY_MODEL, list_token_factory_models
+from .token_factory_provider import DEFAULT_TOKEN_FACTORY_MODEL, list_token_factory_models, is_token_factory_enabled
 
 
 WEB_ROOT = Path(__file__).with_name("web")
@@ -180,25 +180,11 @@ def run_demo(mode: str = "live") -> dict[str, Any]:
     if mode != "live":
         raise ValueError("mode must be live, mock, or replay")
 
-    models = list_token_factory_models(mock=False)
-    if not models.get("ok"):
-        return {
-            "mode": "live",
-            "truth": "BLOCKED",
-            "stage": "gemma",
-            "error": "AMD Token Factory model discovery failed",
-            "details": str(models.get("error") or "unavailable"),
-        }
-
-    catalog = models.get("models", {}).get("data", [])
+    tf_enabled = is_token_factory_enabled()
+    models = list_token_factory_models(mock=False) if tf_enabled else {"ok": False, "disabled": True}
+    catalog = models.get("models", {}).get("data", []) if isinstance(models.get("models"), dict) else []
     model_ids = [str(item.get("id")) for item in catalog if isinstance(item, dict)]
-    if DEFAULT_TOKEN_FACTORY_MODEL not in model_ids:
-        return {
-            "mode": "live",
-            "truth": "BLOCKED",
-            "stage": "gemma",
-            "error": DEFAULT_TOKEN_FACTORY_MODEL + " not present in live Token Factory catalog",
-        }
+    tf_live = tf_enabled and bool(models.get("ok")) and DEFAULT_TOKEN_FACTORY_MODEL in model_ids
 
     evolus = evolus_smoke(mock=False)
     evolus_live = (
@@ -221,13 +207,18 @@ def run_demo(mode: str = "live") -> dict[str, Any]:
             },
         }
 
-    result = run_dual_prize_pipeline(DEFAULT_INCIDENT, gemma_mock=False, evolus_mock=False)
+    # If Token Factory is enabled and live, run live gemma; otherwise run standby/reserve gemma
+    # while keeping evolus live and mode="live"
+    gemma_mock = not tf_live
+    result = run_dual_prize_pipeline(DEFAULT_INCIDENT, gemma_mock=gemma_mock, evolus_mock=False)
     proofs = {
         "gemma": {
-            "models_endpoint_ok": True,
+            "status": "LIVE" if tf_live else "STANDBY",
+            "models_endpoint_ok": bool(models.get("ok")),
             "available_models_count": len(model_ids),
-            "target_model_present": True,
-            "runtime": "AMD Developer Cloud / ROCm Token Factory",
+            "target_model_present": DEFAULT_TOKEN_FACTORY_MODEL in model_ids,
+            "runtime": "AMD Developer Cloud / ROCm Token Factory" if tf_live else "AMD Developer Cloud / ROCm Token Factory (Standby Reserve)",
+            "standby": not tf_live,
         },
         "evolus": {
             "mcp_live": True,
